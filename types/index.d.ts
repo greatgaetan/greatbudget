@@ -15,3 +15,7 @@ export type NavItem = {
 }
 
 export type MainNavItem = NavItem
+
+export type BankAccountWithCategory = BankAccount & {
+  category: Category[]
+}

@@ -18,7 +18,7 @@ export default function LoginPage() {
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold flex flex-row items-center justify-center gap-1">
           Welcome back
-          <HeartHandshake className="h-6 w-6" />
+          <HeartHandshake className="h-6 w-6 ml-1" />
         </h1>
         <p className="text-sm text-muted-foreground">
           Enter your credentials to log in

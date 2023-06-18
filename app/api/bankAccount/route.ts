@@ -56,7 +56,7 @@ export async function POST(req: Request) {
       },
     })
 
-    return new Response(JSON.stringify(bankAccounts))
+    return new Response(JSON.stringify(bankAccounts), { status: 200 })
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })

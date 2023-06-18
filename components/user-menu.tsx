@@ -30,7 +30,7 @@ export default function UserMenu({ user }: UserAccountNavProps) {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="dark:text-white">
+      <DropdownMenuContent className="dark:text-white" align="end">
         <div className="flex items-center justify-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             <span className="text-sm text-foreground">

@@ -42,7 +42,7 @@ export default async function MarketingLayout({
         </div>
       </header>
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer className="border-t" />
     </div>
   )
 }

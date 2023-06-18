@@ -29,9 +29,7 @@ export default async function DashboardLayout({
         </div>
       </header>
       <div className="container flex-1 ">
-        <main className="flex w-full flex-1 flex-col overflow-hidden">
-          {children}
-        </main>
+        <main className="flex w-full flex-1 flex-col">{children}</main>
       </div>
 
       <Footer className="border-t" />
