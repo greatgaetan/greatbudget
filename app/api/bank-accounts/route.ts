@@ -46,7 +46,7 @@ export async function POST(req: Request) {
     const json = await req.json()
     const body = bankAccountCreateSchema.parse(json)
 
-    const bankAccount = await db.bankAccount.create({
+    const bankAccounts = await db.bankAccount.create({
       data: {
         name: body.name,
         userId: user.id,
@@ -56,7 +56,7 @@ export async function POST(req: Request) {
       },
     })
 
-    return new Response(JSON.stringify(bankAccount))
+    return new Response(JSON.stringify(bankAccounts))
   } catch (error) {
     if (error instanceof z.ZodError) {
       return new Response(JSON.stringify(error.issues), { status: 422 })
