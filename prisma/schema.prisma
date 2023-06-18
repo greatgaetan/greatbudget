@@ -1,0 +1,79 @@
+// schema.prisma
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["jsonProtocol"]
+}
+
+datasource db {
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl         = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
+}
+
+model User {
+  id           String        @id @default(cuid())
+  email        String        @unique
+  password     String
+  name         String?
+  image        String?
+  createdAt    DateTime      @default(now()) @map(name: "created_at")
+  updatedAt    DateTime      @updatedAt @map(name: "updated_at")
+  bankAccounts BankAccount[]
+  sessions     Session[]
+
+  @@map(name: "users")
+}
+
+model BankAccount {
+  id         String                @id @default(cuid())
+  name       String
+  categories TransactionCategory[]
+  createdAt  DateTime              @default(now()) @map(name: "created_at")
+  updatedAt  DateTime              @updatedAt @map(name: "updated_at")
+  user       User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+
+  @@map(name: "bank_accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+
+  @@map(name: "sessions")
+}
+
+model TransactionCategory {
+  id            String        @id @default(cuid())
+  name          String
+  bankAccount   BankAccount   @relation(fields: [bankAccountId], references: [id], onDelete: Cascade)
+  bankAccountId String
+  transactions  Transaction[]
+  createdAt     DateTime      @default(now()) @map(name: "created_at")
+  updatedAt     DateTime      @updatedAt @map(name: "updated_at")
+
+  @@map(name: "transaction_categories")
+}
+
+model Transaction {
+  id          String              @id @default(cuid())
+  amount      Float
+  type        TransactionType
+  description String?
+  category    TransactionCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  categoryId  String
+  createdAt   DateTime            @default(now()) @map(name: "created_at")
+  updatedAt   DateTime            @updatedAt @map(name: "updated_at")
+
+  @@map(name: "transactions")
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
