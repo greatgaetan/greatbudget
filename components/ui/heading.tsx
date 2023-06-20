@@ -9,10 +9,10 @@ const headingVariants = cva(
   {
     variants: {
       variant: {
-        h1: "text-4xl font-extrabold tracking-tight lg:text-5xl",
-        h2: "text-3xl first:mt-0",
-        h3: "text-2xl",
-        h4: "text-xl",
+        h1: "text-3xl font-extrabold tracking-tight lg:text-4xl",
+        h2: "text-2xl first:mt-0",
+        h3: "text-xl",
+        h4: "text-lg",
       },
     },
     defaultVariants: {

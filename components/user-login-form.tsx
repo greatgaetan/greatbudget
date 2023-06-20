@@ -68,10 +68,7 @@ export default function UserLoginForm() {
       title: "Successfully logged in",
       description: "You are now logged in. Redirecting you to the dashboard.",
     })
-
-    setTimeout(() => {
-      router.push("/dashboard")
-    }, 2000)
+    router.push("/dashboard")
   }
 
   return (

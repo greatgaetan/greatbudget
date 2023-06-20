@@ -3,6 +3,7 @@ import * as z from "zod"
 
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
+import { NextRequest, NextResponse } from "next/server"
 
 const bankAccountCreateSchema = z.object({
   name: z.string(),
@@ -12,11 +13,11 @@ export async function GET() {
     const session = await getServerSession(authOptions)
 
     if (!session) {
-      return new Response("Unauthorized", { status: 403 })
+      return NextResponse.json("Unauthorized", { status: 403 })
     }
 
     const { user } = session
-    const posts = await db.bankAccount.findMany({
+    const bankAccounts = await db.bankAccount.findMany({
       select: {
         id: true,
         name: true,
@@ -27,18 +28,18 @@ export async function GET() {
       },
     })
 
-    return new Response(JSON.stringify(posts))
+    return NextResponse.json(bankAccounts, { status: 200 })
   } catch (error) {
-    return new Response(null, { status: 500 })
+    return NextResponse.json(error, { status: 500 })
   }
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
 
     if (!session) {
-      return new Response("Unauthorized", { status: 403 })
+      return NextResponse.json("Unauthorized", { status: 403 })
     }
 
     const { user } = session
@@ -46,6 +47,11 @@ export async function POST(req: Request) {
     const json = await req.json()
     const body = bankAccountCreateSchema.parse(json)
 
+    if (!body.name || body.name.length < 0 || body.name.length > 25) {
+      return NextResponse.json("Name must be between 2 and 25 characters", {
+        status: 400,
+      })
+    }
     const bankAccounts = await db.bankAccount.create({
       data: {
         name: body.name,
@@ -55,13 +61,12 @@ export async function POST(req: Request) {
         id: true,
       },
     })
-
-    return new Response(JSON.stringify(bankAccounts), { status: 200 })
+    return NextResponse.json(bankAccounts, { status: 200 })
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response(JSON.stringify(error.issues), { status: 422 })
+      return NextResponse.json(error.issues, { status: 422 })
     }
 
-    return new Response(null, { status: 500 })
+    return NextResponse.json(error, { status: 500 })
   }
 }

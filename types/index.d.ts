@@ -1,3 +1,4 @@
+import type { BankAccount } from "@prisma/client"
 export type SiteConfig = {
   name: string
   description: string

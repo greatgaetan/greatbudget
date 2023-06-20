@@ -16,7 +16,7 @@ model User {
   id           String        @id @default(cuid())
   email        String        @unique
   password     String
-  name         String?
+  name         String?       @db.VarChar(25)
   image        String?
   createdAt    DateTime      @default(now()) @map(name: "created_at")
   updatedAt    DateTime      @updatedAt @map(name: "updated_at")
@@ -29,6 +29,7 @@ model User {
 model BankAccount {
   id         String                @id @default(cuid())
   name       String
+  iconName   String?
   categories TransactionCategory[]
   createdAt  DateTime              @default(now()) @map(name: "created_at")
   updatedAt  DateTime              @updatedAt @map(name: "updated_at")

@@ -2,6 +2,12 @@
 
 import { buttonVariants } from "@/components/ui/button"
 import {
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
+import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
@@ -10,51 +16,56 @@ import {
 import { Heading } from "@/components/ui/heading"
 import { cn } from "@/lib/utils"
 import { BankAccountWithCategory } from "@/types"
+import { Dialog, DialogTrigger } from "@radix-ui/react-dialog"
 import { DropdownMenu, DropdownMenuLabel } from "@radix-ui/react-dropdown-menu"
 import { ChevronDown, ChevronsDown, ChevronsUpDown, Plus } from "lucide-react"
 
+import Link from "next/link"
 import React from "react"
+import AddBankAccountDialog from "./add-bank-account-dialog"
 
 interface HeadingMenuProps {
-  bankAccounts: Pick<BankAccountWithCategory, "name" | "categories">[]
+  current: BankAccountWithCategory
+  bankAccounts: BankAccountWithCategory[]
 }
 
-export default function HeadingSelector({ bankAccounts }: HeadingMenuProps) {
-  const [selected, setSelected] = React.useState(
-    bankAccounts.length > 0 ? bankAccounts[0] : null
-  )
-
+export default function HeadingSelector({
+  current,
+  bankAccounts,
+}: HeadingMenuProps) {
   if (bankAccounts.length === 0) return null
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <div
-          className={
-            "hover:bg-accent py-2 px-4 -ml-4 w-fit rounded-md hover:text-accent-foreground cursor-pointer"
-          }
-        >
-          <div className="inline-flex items-center text-xs">
-            BANK ACCOUNT <ChevronDown className="h-3 w-3 ml-1" />
-          </div>
-          <Heading variant="h3">{selected?.name}</Heading>
-        </div>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="ml-4">
-        {bankAccounts.map((bankAccount) => (
-          <DropdownMenuItem
-            key={bankAccount.name}
-            onSelect={() => setSelected(bankAccount)}
+    <Dialog>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div
+            className={
+              "hover:bg-accent py-2 px-4 -ml-4 w-fit rounded-lg hover:text-accent-foreground cursor-pointer"
+            }
           >
-            {bankAccount.name}
-          </DropdownMenuItem>
-        ))}
-        <DropdownMenuSeparator />
-        <DropdownMenuItem className="flex flex-row items-center gap-1">
-          <Plus className="h-4 w-4" />
-          New bank account
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+            <div className="inline-flex items-center text-xs">
+              BANK ACCOUNT <ChevronDown className="h-3 w-3 ml-1" />
+            </div>
+            <Heading variant="h3">{current?.name}</Heading>
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start" className="ml-4">
+          {bankAccounts.map((bankAccount) => (
+            <Link key={bankAccount.id} href={`/dashboard/${bankAccount.id}`}>
+              <DropdownMenuItem>{bankAccount.name}</DropdownMenuItem>
+            </Link>
+          ))}
+          <DropdownMenuSeparator />
+          <DialogTrigger>
+            <DropdownMenuItem className="flex flex-row items-center gap-1 cursor-pointer">
+              <Plus className="h-4 w-4" />
+              New bank account
+            </DropdownMenuItem>
+          </DialogTrigger>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <AddBankAccountDialog inDropdown={true} />
+    </Dialog>
   )
 }

@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
+import { useRouter } from "next/navigation"
 import React from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
@@ -15,29 +16,37 @@ import {
   FormMessage,
 } from "./ui/form"
 import { Input } from "./ui/input"
+import { toast } from "./ui/use-toast"
 
-const formSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  password: z
-    .string()
-    .min(8, {
-      message: "Please enter a password of at least 8 characters.",
-    })
-    .max(50, {
-      message: "Please enter a password of at most 50 characters.",
-    }),
-  confirmPassword: z.string().min(8, {
+const password = z
+  .string()
+  .min(8, {
     message: "Please enter a password of at least 8 characters.",
-  }),
-  name: z.string().min(2, {
-    message: "Please enter a name of at least 2 characters.",
-  }),
-})
+  })
+  .max(50, {
+    message: "Please enter a password of at most 50 characters.",
+  })
+
+const formSchema = z
+  .object({
+    email: z.string().email({
+      message: "Please enter a valid email address.",
+    }),
+    password: password,
+    confirmPassword: password,
+    name: z.string().min(2, {
+      message: "Please enter a name of at least 2 characters.",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"], // path of error
+  })
 
 export default function UserRegisterForm() {
   const [isLoading, setIsLoading] = React.useState(false)
+  const [requestSucceeded, setRequestSucceeded] = React.useState(false)
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -58,12 +67,34 @@ export default function UserRegisterForm() {
         },
         body: JSON.stringify(values),
       })
-      console.log("response: ", response)
-    } catch (error) {
-      console.log(error)
-    }
+      const message = await response.json()
 
-    setIsLoading(false)
+      if (!response.ok) {
+        toast({
+          title: "Error",
+          description: message,
+          variant: "destructive",
+        })
+        return
+      }
+
+      setRequestSucceeded(true)
+      toast({
+        title: "Success",
+        description: `Your account has been created. Welcome ${message.name}! You will be redirected to the login page.`,
+      })
+      setTimeout(() => {
+        router.push("/login")
+      }, 2000)
+    } catch (error) {
+      toast({
+        title: "Unexpected error",
+        description: "An error occurred. Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -144,7 +175,11 @@ export default function UserRegisterForm() {
             </FormItem>
           )}
         />
-        <Button className="w-full" type="submit">
+        <Button
+          className="w-full"
+          type="submit"
+          disabled={isLoading || requestSucceeded}
+        >
           {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Sign
           Up
         </Button>
