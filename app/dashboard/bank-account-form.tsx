@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { toast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { BankAccount } from "@prisma/client"
 import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
 import React from "react"
@@ -29,22 +30,40 @@ const formSchema = z.object({
     }),
 })
 
-export default function BankAccountForm() {
+interface BankAccountFormProps {
+  formType: "create" | "update"
+  bankAccount?: Pick<BankAccount, "id" | "name">
+}
+
+export default function BankAccountForm(props: BankAccountFormProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [requestSucceeded, setRequestSucceeded] = React.useState(false)
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: props.bankAccount?.name ?? "",
     },
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
+    let method, apiUrl, successMessage
+    switch (props.formType) {
+      case "update":
+        method = "PATCH"
+        apiUrl = `/api/bank-accounts/${props.bankAccount?.id}`
+        successMessage = `Bank account "${values.name}" updated.`
+        break
+      default:
+        method = "POST"
+        apiUrl = "/api/bank-accounts"
+        successMessage = `New bank account "${values.name}" created.`
+    }
+
     try {
-      const response = await fetch("/api/bank-account", {
-        method: "POST",
+      const response = await fetch(apiUrl, {
+        method,
         headers: {
           "Content-Type": "application/json",
         },
@@ -63,7 +82,7 @@ export default function BankAccountForm() {
       setRequestSucceeded(true)
       toast({
         title: "Success",
-        description: `New bank account "${values.name}" created.`,
+        description: successMessage,
       })
       router.refresh()
     } catch (error) {
@@ -96,7 +115,7 @@ export default function BankAccountForm() {
         <div className="flex justify-end">
           <Button type="submit" disabled={isLoading || requestSucceeded}>
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Create
+            {props.formType === "update" ? "Save" : "Create"}
           </Button>
         </div>
       </form>

@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { Dialog } from "@/components/ui/dialog"
 import { Heading, headingVariants } from "@/components/ui/heading"
-import { Separator } from "@/components/ui/separator"
 import {
   Tooltip,
   TooltipContent,
@@ -10,21 +10,16 @@ import {
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
+import { cn } from "@/lib/utils"
 import { BankAccountWithCategory } from "@/types"
 import { format } from "date-fns"
-import {
-  ArrowLeftRight,
-  BadgePlus,
-  Dot,
-  Edit,
-  MoreVertical,
-  Pencil,
-} from "lucide-react"
-
+import { ArrowLeftRight, CalendarPlus, Edit, Plus } from "lucide-react"
 import { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import React from "react"
+import BankAccountDialog from "./bank-account-dialog"
+import { BankAccountOperations } from "./bank-account-operations"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -49,57 +44,45 @@ export default async function Page() {
       createdAt: true,
       updatedAt: true,
     },
+    orderBy: {
+      updatedAt: "desc",
+    },
   })) as unknown as BankAccountWithCategory[]
 
   return (
     <div className="flex flex-col justify-center items-center mt-8">
-      <Heading variant="h1">Dashboard</Heading>
-      <p className="text-lg text-muted-foreground text-center">
-        Create and manage your bank accounts.
-      </p>
-      <div className="-ml-2 mt-4 sm:w-2/3 lg:w-1/2 divide-y divide-border">
+      <div className="flex flex-col sm:flex-row items-center justify-between sm:w-2/3 lg:w-1/2">
+        <div>
+          <Heading variant="h1">Dashboard</Heading>
+          <p className="text-lg text-muted-foreground">
+            Create and manage your bank accounts.
+          </p>
+        </div>
+        <BankAccountDialog
+          formType="create"
+          className={cn(buttonVariants(), "w-full mt-4 sm:mt-0 sm:w-auto")}
+        >
+          <Plus className="h-4 w-4 mr-1" />
+          <span>New bank account</span>
+        </BankAccountDialog>
+      </div>
+      <div className="mt-4 sm:w-2/3 lg:w-1/2 divide-y divide-border">
         {bankAccounts.map((bankAccount) => (
-          // <div
-          //   key={bankAccount.id}
-          //   className="flex flex-row justify-between items-center divide-y divide-border hover:bg-accent rounded-md"
-          // >
-          //   <Link href={`/dashboard/${bankAccount.id}`}>
-          //     <div className="py-4 px-2">
-          //       <div>
-          //         <Heading variant="h2">{bankAccount.name}</Heading>
-          //         <div className="flex flex-row items-center gap-4 mt-2">
-          //           <div className="flex flex-row items-center gap-2">
-          //             <ArrowLeftRight className="h-4 w-4 text-muted-foreground" />
-          //             <span>0</span>
-          //           </div>
-          //           <div className="flex flex-row items-center gap-2">
-          //             <BadgePlus className="h-4 w-4 text-muted-foreground" />
-          //             <span>{format(bankAccount.createdAt, "dd MMM")}</span>
-          //           </div>
-          //           <div className="flex flex-row items-center gap-2">
-          //             <Pencil className="h-4 w-4 text-muted-foreground" />
-          //             <span>{format(bankAccount.updatedAt, "dd MMM")}</span>
-          //           </div>
-          //         </div>
-          //       </div>
-          //     </div>
-          //   </Link>
-          //   <Button>
-          //     <Edit className="h-4 w-4" />
-          //   </Button>
-          // </div>
           <div
             key={bankAccount.id}
-            className="flex items-center justify-between p-4 -ml-2"
+            className="flex items-center justify-between py-4"
           >
             <div className="grid gap-1">
               <Link
                 href={`/dashboard/${bankAccount.id}`}
-                className={"font-semibold text-xl lg:text-2xl hover:underline"}
+                className={cn(
+                  headingVariants({ variant: "h2" }),
+                  "lg:hover:text-foreground lg:text-muted-foreground text-foreground"
+                )}
               >
                 {bankAccount.name}
               </Link>
-              <div className="flex flex-row items-center gap-4 mt-2">
+              <div className="flex flex-row items-center mt-2 gap-4">
                 <div className="flex flex-row items-center gap-2">
                   <TooltipProvider>
                     <Tooltip>
@@ -120,7 +103,7 @@ export default async function Page() {
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="inline-flex items-center gap-2">
-                          <BadgePlus className="h-4 w-4 text-muted-foreground" />
+                          <CalendarPlus className="h-4 w-4 text-muted-foreground" />
                           <span className="text-sm lg:text-base">
                             {format(bankAccount.createdAt, "dd MMM")}
                           </span>
@@ -132,13 +115,12 @@ export default async function Page() {
                     </Tooltip>
                   </TooltipProvider>
                 </div>
-
                 <div className="flex flex-row items-center gap-2">
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger asChild>
                         <div className="inline-flex items-center gap-2">
-                          <Pencil className="h-4 w-4 text-muted-foreground" />
+                          <Edit className="h-4 w-4 text-muted-foreground" />
                           <span className="text-sm lg:text-base">
                             {format(bankAccount.updatedAt, "dd MMM")}
                           </span>
@@ -152,9 +134,7 @@ export default async function Page() {
                 </div>
               </div>
             </div>
-            <Button variant={"outline"} className="z-40">
-              <MoreVertical className="h-4 w-4" />
-            </Button>
+            <BankAccountOperations bankAccount={bankAccount} />
           </div>
         ))}
       </div>

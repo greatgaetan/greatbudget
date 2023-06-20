@@ -1,12 +1,5 @@
 "use client"
 
-import { buttonVariants } from "@/components/ui/button"
-import {
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
 import {
   DropdownMenuContent,
   DropdownMenuItem,
@@ -14,15 +7,13 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Heading } from "@/components/ui/heading"
-import { cn } from "@/lib/utils"
 import { BankAccountWithCategory } from "@/types"
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog"
-import { DropdownMenu, DropdownMenuLabel } from "@radix-ui/react-dropdown-menu"
-import { ChevronDown, ChevronsDown, ChevronsUpDown, Plus } from "lucide-react"
-
+import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
+import { ChevronDown, Plus } from "lucide-react"
 import Link from "next/link"
 import React from "react"
-import AddBankAccountDialog from "./add-bank-account-dialog"
+import BankAccountDialog from "./bank-account-dialog"
 
 interface HeadingMenuProps {
   current: BankAccountWithCategory
@@ -57,7 +48,7 @@ export default function HeadingSelector({
             </Link>
           ))}
           <DropdownMenuSeparator />
-          <DialogTrigger>
+          <DialogTrigger className="w-full">
             <DropdownMenuItem className="flex flex-row items-center gap-1 cursor-pointer">
               <Plus className="h-4 w-4" />
               New bank account
@@ -65,7 +56,7 @@ export default function HeadingSelector({
           </DialogTrigger>
         </DropdownMenuContent>
       </DropdownMenu>
-      <AddBankAccountDialog inDropdown={true} />
+      <BankAccountDialog inDropdown={true} formType="create" />
     </Dialog>
   )
 }

@@ -1,7 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import { useSelectedLayoutSegment } from "next/navigation"
+import {
+  usePathname,
+  useSelectedLayoutSegment,
+  useSelectedLayoutSegments,
+} from "next/navigation"
 import * as React from "react"
 
 import { siteConfig } from "@/config/site"
@@ -16,7 +20,8 @@ interface MainNavProps {
 }
 
 export function MainNav({ items, children }: MainNavProps) {
-  const segment = useSelectedLayoutSegment()
+  const path = usePathname()
+
   const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
 
   return (
@@ -35,7 +40,7 @@ export function MainNav({ items, children }: MainNavProps) {
               href={item.disabled ? "#" : item.href}
               className={cn(
                 "flex items-center text-lg font-medium transition-colors hover:text-foreground/80 sm:text-sm",
-                item.href.startsWith(`/${segment}`)
+                path.startsWith(item.href)
                   ? "text-foreground"
                   : "text-foreground/60",
                 item.disabled && "cursor-not-allowed opacity-80"

@@ -21,7 +21,7 @@ async function getBankAccountsForUser(
       id: bankAccountId,
       userId: userId,
     },
-  })) as Pick<BankAccountWithCategory, "id" | "name" | "categories">
+  })) as unknown as BankAccountWithCategory
 }
 
 async function getAllBankAccountsForUser(userId: User["id"]) {
@@ -34,7 +34,7 @@ async function getAllBankAccountsForUser(userId: User["id"]) {
     where: {
       userId: userId,
     },
-  })) as Pick<BankAccountWithCategory, "id" | "name" | "categories">[]
+  })) as unknown as BankAccountWithCategory[]
 }
 
 interface EditorPageProps {
@@ -62,6 +62,11 @@ export default async function EditorPage({ params }: EditorPageProps) {
   return (
     <div>
       <HeadingSelector bankAccounts={bankAccounts} current={bankAccount} />
+      <div>
+        To prove that I am on the right bank account, here is the info of the
+        current selected:
+      </div>
+      <pre>{JSON.stringify(bankAccount, null, 2)}</pre>
     </div>
     // <Editor
     //   bankAccount={{
