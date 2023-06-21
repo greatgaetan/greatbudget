@@ -30,18 +30,14 @@ export default function HeadingSelector({
     <Dialog>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div
-            className={
-              "hover:bg-accent py-2 px-4 -ml-4 w-fit rounded-lg hover:text-accent-foreground cursor-pointer"
-            }
-          >
+          <div className={"mb-4 w-fit rounded-lg cursor-pointer"}>
             <div className="inline-flex items-center text-xs">
-              BANK ACCOUNT <ChevronDown className="h-3 w-3 ml-1" />
+              SELECT BANK ACCOUNT <ChevronDown className="h-3 w-3 ml-1" />
             </div>
             <Heading variant="h3">{current?.name}</Heading>
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="start" className="ml-4">
+        <DropdownMenuContent align="start">
           {bankAccounts.map((bankAccount) => (
             <Link key={bankAccount.id} href={`/dashboard/${bankAccount.id}`}>
               <DropdownMenuItem>{bankAccount.name}</DropdownMenuItem>
