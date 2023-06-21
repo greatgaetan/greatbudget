@@ -1,6 +1,7 @@
 "use client"
 import { cn } from "@/lib/utils"
-import { BankAccountWithTransactions } from "@/types"
+import { BankAccountWithTransactions, TransactionsFilter } from "@/types"
+import { calculateMonthlyTotals } from "@/utils/transactions"
 import { TransactionType } from "@prisma/client"
 import { TooltipTrigger } from "@radix-ui/react-tooltip"
 import { format } from "date-fns"
@@ -33,66 +34,15 @@ import { ScrollArea } from "./ui/scroll-area"
 import { Separator } from "./ui/separator"
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
 
-type tabsValues = "incomes" | "expenses" | "savings"
-
 export default function BankAccountPanel({
   bankAccount,
 }: {
   bankAccount: BankAccountWithTransactions
 }) {
-  const [activeTab, setActiveTab] = React.useState<tabsValues>("incomes")
+  const [activeTab, setActiveTab] =
+    React.useState<TransactionsFilter>("incomes")
   const noTransactions = bankAccount.transactions.length === 0
   const { theme } = useTheme()
-  // Calculate the monthly totals for the chart
-  const calculateMonthlyTotals = (type: tabsValues) => {
-    const transactions = bankAccount.transactions
-
-    if (!transactions.length) return []
-
-    // Determine the range of months that have transactions
-    const sortedTransactions = transactions.sort(
-      (a, b) => a.createdAt.getTime() - b.createdAt.getTime()
-    )
-    const startMonth = sortedTransactions[0].createdAt.getMonth()
-    const endMonth =
-      sortedTransactions[sortedTransactions.length - 1].createdAt.getMonth()
-
-    // Create an array for the months that have transactions
-    let monthlyTotals = Array(endMonth - startMonth + 1).fill(0)
-
-    // Iterate over the transactions and add/subtract from the appropriate month
-    for (let transaction of transactions) {
-      const month = transaction.createdAt.getMonth()
-
-      // Only process transactions in the range of months
-      if (month >= startMonth && month <= endMonth) {
-        if (type === "incomes" && transaction.type === TransactionType.INCOME) {
-          monthlyTotals[month - startMonth] += transaction.amount
-        } else if (
-          type === "expenses" &&
-          transaction.type === TransactionType.EXPENSE
-        ) {
-          monthlyTotals[month - startMonth] += transaction.amount
-        } else if (type === "savings") {
-          if (transaction.type === TransactionType.INCOME) {
-            monthlyTotals[month - startMonth] += transaction.amount
-          } else if (transaction.type === TransactionType.EXPENSE) {
-            monthlyTotals[month - startMonth] -= transaction.amount
-          }
-        }
-      }
-    }
-
-    // Map over monthlyTotals and return array of objects with the same structure as the 'data' array
-    return monthlyTotals.map((total, i) => {
-      return {
-        name: new Date(0, i + startMonth).toLocaleString("default", {
-          month: "short",
-        }),
-        total: total,
-      }
-    })
-  }
 
   const CustomTooltip = ({
     active,
@@ -108,21 +58,6 @@ export default function BankAccountPanel({
     }
 
     return null
-  }
-
-  const CustomCursorFill = () => {
-    const isLight = theme === "light"
-    const green = isLight ? "#B6F3CC" : "#006E30"
-    const red = isLight ? "#FBC7C8" : "#B50203"
-    const primary = isLight ? "#9DB3F3" : "#0B38B4"
-    return {
-      fill:
-        activeTab === "incomes"
-          ? green
-          : activeTab === "expenses"
-          ? red
-          : primary,
-    }
   }
 
   return (
@@ -155,7 +90,7 @@ export default function BankAccountPanel({
           </TabsList>
         </Tabs>
         {noTransactions ? (
-          <div className="col-span-3 border border-dashed text-accent-foreground flex items-center justify-center rounded-lg row-auto">
+          <div className="col-span-3 border border-dashed text-accent-foreground flex items-center justify-center rounded-lg row-auto h-[400px]">
             <div className="flex flex-col items-center">
               <div className="bg-accent p-4 rounded-full mb-4">
                 <BarChartBig className="h-8 w-8" />
@@ -170,7 +105,7 @@ export default function BankAccountPanel({
           </div>
         ) : (
           <ResponsiveContainer width={"100%"} height={400}>
-            <BarChart data={calculateMonthlyTotals(activeTab)}>
+            <BarChart data={calculateMonthlyTotals(bankAccount, activeTab)}>
               <CartesianGrid strokeDasharray={"3"} vertical={false} />
               <XAxis
                 dataKey="name"
@@ -188,7 +123,10 @@ export default function BankAccountPanel({
               />
               <Tooltip
                 content={<CustomTooltip />}
-                cursor={CustomCursorFill()}
+                cursor={{
+                  fill: theme === "light" ? "#FDF1E7" : "#1C1E2B",
+                  opacity: 0.7,
+                }}
               />
               <Bar
                 dataKey="total"

@@ -21,3 +21,5 @@ export type MainNavItem = NavItem
 export type BankAccountWithTransactions = BankAccount & {
   transactions: Transaction[]
 }
+
+export type TransactionsFilter = "incomes" | "expenses" | "savings"
