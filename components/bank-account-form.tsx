@@ -1,16 +1,5 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { toast } from "@/components/ui/use-toast"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { BankAccount } from "@prisma/client"
 import { Loader2 } from "lucide-react"
@@ -18,6 +7,17 @@ import { useRouter } from "next/navigation"
 import React from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import { Button } from "./ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form"
+import { Input } from "./ui/input"
+import { toast } from "./ui/use-toast"
 
 const formSchema = z.object({
   name: z

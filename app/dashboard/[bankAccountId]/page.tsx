@@ -1,11 +1,32 @@
 import { BankAccount, User } from "@prisma/client"
 import { notFound, redirect } from "next/navigation"
 
+import BankAccountPanel from "@/components/bank-account-panel"
+import HeadingSelector from "@/components/heading-selector"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
-import { BankAccountWithCategory } from "@/types"
-import HeadingSelector from "../heading-selector"
+import { BankAccountWithTransactions } from "@/types"
+import { Metadata } from "next"
+
+export async function generateMetadata({
+  params,
+}: BankAccountPageProps): Promise<Metadata> {
+  const user = await getCurrentUser()
+
+  if (!user) {
+    redirect(authOptions?.pages?.signIn || "/login")
+  }
+
+  const bankAccount = await getBankAccountsForUser(
+    params.bankAccountId,
+    user.id
+  )
+
+  return {
+    title: bankAccount.name,
+  }
+}
 
 async function getBankAccountsForUser(
   bankAccountId: BankAccount["id"],
@@ -15,13 +36,13 @@ async function getBankAccountsForUser(
     select: {
       id: true,
       name: true,
-      categories: true,
+      transactions: true,
     },
     where: {
       id: bankAccountId,
       userId: userId,
     },
-  })) as unknown as BankAccountWithCategory
+  })) as unknown as BankAccountWithTransactions
 }
 
 async function getAllBankAccountsForUser(userId: User["id"]) {
@@ -29,19 +50,20 @@ async function getAllBankAccountsForUser(userId: User["id"]) {
     select: {
       id: true,
       name: true,
-      categories: true,
     },
     where: {
       userId: userId,
     },
-  })) as unknown as BankAccountWithCategory[]
+  })) as unknown as BankAccount[]
 }
 
-interface EditorPageProps {
+interface BankAccountPageProps {
   params: { bankAccountId: string }
 }
 
-export default async function EditorPage({ params }: EditorPageProps) {
+export default async function BankAccountPage({
+  params,
+}: BankAccountPageProps) {
   const user = await getCurrentUser()
 
   if (!user) {
@@ -62,19 +84,7 @@ export default async function EditorPage({ params }: EditorPageProps) {
   return (
     <div>
       <HeadingSelector bankAccounts={bankAccounts} current={bankAccount} />
-      <div>
-        To prove that I am on the right bank account, here is the info of the
-        current selected:
-      </div>
-      <pre>{JSON.stringify(bankAccount, null, 2)}</pre>
+      <BankAccountPanel bankAccount={bankAccount} />
     </div>
-    // <Editor
-    //   bankAccount={{
-    //     id: bankAccount.id,
-    //     title: bankAccount.title,
-    //     content: bankAccount.content,
-    //     published: bankAccount.published,
-    //   }}
-    // />
   )
 }

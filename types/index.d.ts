@@ -1,4 +1,5 @@
-import type { BankAccount } from "@prisma/client"
+import type { BankAccount, Transaction } from "@prisma/client"
+
 export type SiteConfig = {
   name: string
   description: string
@@ -17,6 +18,6 @@ export type NavItem = {
 
 export type MainNavItem = NavItem
 
-export type BankAccountWithCategory = BankAccount & {
-  category: Category[]
+export type BankAccountWithTransactions = BankAccount & {
+  transactions: Transaction[]
 }

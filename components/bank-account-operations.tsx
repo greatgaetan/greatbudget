@@ -1,5 +1,11 @@
 "use client"
 
+import { BankAccount } from "@prisma/client"
+import { Loader2, MoreVertical, Plus, Trash } from "lucide-react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import * as React from "react"
+import BankAccountDialog from "./bank-account-dialog"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -9,22 +15,16 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog"
-import { Dialog, DialogTrigger } from "@/components/ui/dialog"
+} from "./ui/alert-dialog"
+import { Dialog, DialogTrigger } from "./ui/dialog"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { toast } from "@/components/ui/use-toast"
-import { BankAccount } from "@prisma/client"
-import { Loader2, MoreVertical, Plus, Trash } from "lucide-react"
-import Link from "next/link"
-import { useRouter } from "next/navigation"
-import * as React from "react"
-import BankAccountDialog from "./bank-account-dialog"
+} from "./ui/dropdown-menu"
+import { toast } from "./ui/use-toast"
 
 async function deleteBankAccount(bankAccountId: string) {
   const response = await fetch(`/api/bank-accounts/${bankAccountId}`, {

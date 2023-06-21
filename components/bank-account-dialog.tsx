@@ -1,3 +1,6 @@
+import { BankAccount } from "@prisma/client"
+import React from "react"
+import BankAccountForm from "./bank-account-form"
 import {
   Dialog,
   DialogContent,
@@ -5,10 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog"
-import { BankAccount } from "@prisma/client"
-import React from "react"
-import BankAccountForm from "./bank-account-form"
+} from "./ui/dialog"
 
 type DialogProps = {
   inDropdown?: boolean

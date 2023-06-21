@@ -1,23 +1,23 @@
 "use client"
 
-import {
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Heading } from "@/components/ui/heading"
-import { BankAccountWithCategory } from "@/types"
+import { BankAccount } from "@prisma/client"
 import { Dialog, DialogTrigger } from "@radix-ui/react-dialog"
 import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
 import { ChevronDown, Plus } from "lucide-react"
 import Link from "next/link"
 import React from "react"
 import BankAccountDialog from "./bank-account-dialog"
+import {
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu"
+import { Heading } from "./ui/heading"
 
 interface HeadingMenuProps {
-  current: BankAccountWithCategory
-  bankAccounts: BankAccountWithCategory[]
+  current: BankAccount
+  bankAccounts: BankAccount[]
 }
 
 export default function HeadingSelector({

@@ -1,25 +1,19 @@
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Dialog } from "@/components/ui/dialog"
+import BankAccountDialog from "@/components/bank-account-dialog"
+import { BankAccountOperations } from "@/components/bank-account-operations"
+import BankAccountTooltip from "@/components/bank-account-tooltip"
+import { buttonVariants } from "@/components/ui/button"
 import { Heading, headingVariants } from "@/components/ui/heading"
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { cn } from "@/lib/utils"
-import { BankAccountWithCategory } from "@/types"
+import { BankAccount } from "@prisma/client"
 import { format } from "date-fns"
 import { ArrowLeftRight, CalendarPlus, Edit, Plus } from "lucide-react"
 import { Metadata } from "next"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import React from "react"
-import BankAccountDialog from "./bank-account-dialog"
-import { BankAccountOperations } from "./bank-account-operations"
 
 export const metadata: Metadata = {
   title: "Dashboard",
@@ -40,14 +34,13 @@ export default async function Page() {
     select: {
       id: true,
       name: true,
-      categories: true,
       createdAt: true,
       updatedAt: true,
     },
     orderBy: {
       updatedAt: "desc",
     },
-  })) as unknown as BankAccountWithCategory[]
+  })) as unknown as BankAccount[]
 
   return (
     <div className="flex flex-col justify-center items-center mt-8">
@@ -83,55 +76,25 @@ export default async function Page() {
                 {bankAccount.name}
               </Link>
               <div className="flex flex-row items-center mt-2 gap-4">
-                <div className="flex flex-row items-center gap-2">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div className="inline-flex items-center gap-2">
-                          <ArrowLeftRight className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-sm lg:text-base">0</span>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Number of transactions</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-                <div className="flex flex-row items-center gap-2">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div className="inline-flex items-center gap-2">
-                          <CalendarPlus className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-sm lg:text-base">
-                            {format(bankAccount.createdAt, "dd MMM")}
-                          </span>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Created on</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
-                <div className="flex flex-row items-center gap-2">
-                  <TooltipProvider>
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <div className="inline-flex items-center gap-2">
-                          <Edit className="h-4 w-4 text-muted-foreground" />
-                          <span className="text-sm lg:text-base">
-                            {format(bankAccount.updatedAt, "dd MMM")}
-                          </span>
-                        </div>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        <p>Last modified</p>
-                      </TooltipContent>
-                    </Tooltip>
-                  </TooltipProvider>
-                </div>
+                <BankAccountTooltip
+                  icon={
+                    <ArrowLeftRight className="h-4 w-4 text-muted-foreground" />
+                  }
+                  text="0"
+                  content="Transactions"
+                />
+                <BankAccountTooltip
+                  icon={
+                    <CalendarPlus className="h-4 w-4 text-muted-foreground" />
+                  }
+                  text={format(bankAccount.createdAt, "dd MMM")}
+                  content="Created on"
+                />
+                <BankAccountTooltip
+                  icon={<Edit className="h-4 w-4 text-muted-foreground" />}
+                  text={format(bankAccount.updatedAt, "dd MMM")}
+                  content="Last modified"
+                />
               </div>
             </div>
             <BankAccountOperations bankAccount={bankAccount} />

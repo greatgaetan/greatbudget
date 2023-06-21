@@ -5,7 +5,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 const headingVariants = cva(
-  "scroll-m-20 font-semibold tracking-tight transition-colors",
+  "scroll-m-20 font-semibold tracking-tight transition-colors font-heading",
   {
     variants: {
       variant: {

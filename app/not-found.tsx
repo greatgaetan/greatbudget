@@ -16,9 +16,9 @@ export default function NotFound() {
         <Heading variant={"h1"} className="inline-flex items-center mb-4">
           Oops... <ServerCrash className="h-10 w-10 ml-4" />
         </Heading>
-        <Heading variant={"h2"} className="mb-8">
+        <p className="text-lg mb-8">
           The page you are looking for does not exist.
-        </Heading>
+        </p>
         <Link href="/" className={buttonVariants({ variant: "outline" })}>
           Go back home
         </Link>
