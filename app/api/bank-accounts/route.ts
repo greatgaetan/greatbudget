@@ -21,7 +21,6 @@ export async function GET() {
       select: {
         id: true,
         name: true,
-        categories: true,
       },
       where: {
         userId: user.id,
