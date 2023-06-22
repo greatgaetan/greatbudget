@@ -53,15 +53,6 @@ export const metadata = {
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
   description: siteConfig.description,
-  robots: {
-    index: true,
-    follow: true,
-    nocache: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
-  },
 }
 
 const inter = Inter({
