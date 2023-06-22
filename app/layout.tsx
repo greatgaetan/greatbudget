@@ -54,14 +54,14 @@ export const metadata = {
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
   description: siteConfig.description,
-  robots: process.env.NODE_ENV !== "production" && {
-    index: false,
-    follow: false,
-    nocache: false,
+  robots: {
+    index: process.env.NODE_ENV === "production",
+    follow: process.env.NODE_ENV === "production",
+    nocache: process.env.NODE_ENV === "production",
     googleBot: {
-      index: false,
-      follow: false,
-      noimageindex: false,
+      index: process.env.NODE_ENV === "production",
+      follow: process.env.NODE_ENV === "production",
+      noimageindex: process.env.NODE_ENV === "production",
     },
   },
 }
