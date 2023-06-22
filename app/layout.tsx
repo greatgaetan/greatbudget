@@ -55,13 +55,25 @@ export const metadata = {
   manifest: `${siteConfig.url}/site.webmanifest`,
   description: siteConfig.description,
   robots: {
-    index: process.env.NODE_ENV === "production",
-    follow: process.env.NODE_ENV === "production",
-    nocache: process.env.NODE_ENV === "production",
+    index:
+      process.env.NODE_ENV === "production" &&
+      process.env.NEXT_PUBLIC_APP_ENV === "production",
+    follow:
+      process.env.NODE_ENV === "production" &&
+      process.env.NEXT_PUBLIC_APP_ENV === "production",
+    nocache:
+      process.env.NODE_ENV === "production" &&
+      process.env.NEXT_PUBLIC_APP_ENV === "production",
     googleBot: {
-      index: process.env.NODE_ENV === "production",
-      follow: process.env.NODE_ENV === "production",
-      noimageindex: process.env.NODE_ENV === "production",
+      index:
+        process.env.NODE_ENV === "production" &&
+        process.env.NEXT_PUBLIC_APP_ENV === "production",
+      follow:
+        process.env.NODE_ENV === "production" &&
+        process.env.NEXT_PUBLIC_APP_ENV === "production",
+      noimageindex:
+        process.env.NODE_ENV === "production" &&
+        process.env.NEXT_PUBLIC_APP_ENV === "production",
     },
   },
 }
