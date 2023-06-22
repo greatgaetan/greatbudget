@@ -1,19 +1,18 @@
-"use client"
-
 import { BankAccount } from "@prisma/client"
-import { Dialog, DialogTrigger } from "@radix-ui/react-dialog"
-import { DropdownMenu } from "@radix-ui/react-dropdown-menu"
 import { ChevronDown, Plus } from "lucide-react"
 import Link from "next/link"
 import React from "react"
 import BankAccountDialog from "./bank-account-dialog"
+import { Dialog, DialogTrigger } from "./ui/dialog"
 import {
+  DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
 import { Heading } from "./ui/heading"
+import { Skeleton } from "./ui/skeleton"
 
 interface HeadingMenuProps {
   current: BankAccount
@@ -54,5 +53,18 @@ export default function HeadingSelector({
       </DropdownMenu>
       <BankAccountDialog inDropdown={true} formType="create" />
     </Dialog>
+  )
+}
+
+HeadingSelector.Skeleton = function HeadingSelectorSkeleton() {
+  return (
+    <div>
+      <div className={"mb-4 w-fit rounded-lg cursor-pointer"}>
+        <div className="inline-flex items-center text-xs">
+          SELECT BANK ACCOUNT <ChevronDown className="h-3 w-3 ml-1" />
+        </div>
+        <Skeleton className="h-7 w-40" />
+      </div>
+    </div>
   )
 }
