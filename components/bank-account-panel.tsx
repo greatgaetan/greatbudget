@@ -8,8 +8,6 @@ import { Heading } from "./ui/heading"
 import { Skeleton } from "./ui/skeleton"
 import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
 
-const heights = [64, 72, 56, 82, 64, 72, 56, 82, 64, 72]
-
 export default function BankAccountPanel({
   bankAccount,
 }: {
@@ -41,41 +39,41 @@ BankAccountPanel.Skeleton = function BankAccountPanelSkeleton() {
           </Tabs>
         </div>
         <div className="flex-grow flex flex-row items-end justify-evenly mb-">
-          <Skeleton className="w-12 animate-pulse-height h-64" />
+          <Skeleton className="w-4 lg:w-12 animate-pulse-height h-64" />
           <Skeleton
-            className="w-12 animate-pulse-height h-72"
+            className="w-4 lg:w-12 animate-pulse-height h-72"
             style={{ animationDelay: "0.1s" }}
           />
           <Skeleton
-            className="w-12 animate-pulse-height h-56"
+            className="w-4 lg:w-12 animate-pulse-height h-56"
             style={{ animationDelay: "0.2s" }}
           />
           <Skeleton
-            className="w-12 animate-pulse-height h-80"
+            className="w-4 lg:w-12 animate-pulse-height h-80"
             style={{ animationDelay: "0.3s" }}
           />
           <Skeleton
-            className="w-12 animate-pulse-height h-48"
+            className="w-4 lg:w-12 animate-pulse-height h-48"
             style={{ animationDelay: "0.4s" }}
           />
           <Skeleton
-            className="w-12 animate-pulse-height h-72"
+            className="w-4 lg:w-12 animate-pulse-height h-72"
             style={{ animationDelay: "0.5s" }}
           />
           <Skeleton
-            className="w-12 animate-pulse-height h-56"
+            className="w-4 lg:w-12 animate-pulse-height h-56"
             style={{ animationDelay: "0.6s" }}
           />
           <Skeleton
-            className="w-12 animate-pulse-height h-96"
+            className="w-4 lg:w-12 animate-pulse-height h-96"
             style={{ animationDelay: "0.7s" }}
           />
           <Skeleton
-            className="w-12 animate-pulse-height h-64"
+            className="w-4 lg:w-12 animate-pulse-height h-64"
             style={{ animationDelay: "0.8s" }}
           />
           <Skeleton
-            className="w-12 animate-pulse-height h-72"
+            className="w-4 lg:w-12 animate-pulse-height h-72"
             style={{ animationDelay: "0.9s" }}
           />
         </div>

@@ -27,10 +27,6 @@ export default async function DashboardPage() {
     redirect(authOptions?.pages?.signIn || "/login")
   }
 
-  /**
-   * Fetch all bank accounts for the user.
-   * Sort them by the last added transaction.
-   */
   const bankAccounts = await db.bankAccount.findMany({
     select: {
       id: true,
@@ -48,9 +44,11 @@ export default async function DashboardPage() {
     },
   })
 
+  await new Promise((res, rej) => setTimeout(res, 1000))
+
   return (
-    <div className="flex flex-col justify-center items-center mt-8">
-      <div className="flex flex-col sm:flex-row items-center justify-between sm:w-2/3 lg:w-1/2">
+    <div className="flex flex-col items-center md:w-[544px] lg:w-[768px] m-auto mt-8">
+      <div className="flex flex-col sm:flex-row items-center justify-between w-full">
         <div>
           <Heading variant="h1">Dashboard</Heading>
           <p className="text-lg text-muted-foreground">
@@ -65,14 +63,14 @@ export default async function DashboardPage() {
           <span>New bank account</span>
         </BankAccountDialog>
       </div>
-      <div className="mt-4 sm:w-2/3 lg:w-1/2 divide-y divide-border">
+      <div className="mt-4 min-w-[256px] w-full divide-y divide-border">
         {bankAccounts.map((bankAccount) => {
           return (
             <div
               key={bankAccount.id}
               className="flex items-center justify-between py-4"
             >
-              <div className="grid gap-1">
+              <div className="flex flex-col">
                 <Link
                   href={`/dashboard/${bankAccount.id}`}
                   className={cn(
@@ -115,8 +113,8 @@ export default async function DashboardPage() {
 
 DashboardPage.Skeleton = function DashboardSkeleton() {
   return (
-    <div className="flex flex-col justify-center items-center mt-8">
-      <div className="flex flex-col sm:flex-row items-center justify-between sm:w-2/3 lg:w-1/2">
+    <div className="flex flex-col items-center md:w-[544px] lg:w-[768px] m-auto mt-8">
+      <div className="flex flex-col sm:flex-row items-center justify-between w-full">
         <div>
           <Heading variant="h1">Dashboard</Heading>
           <p className="text-lg text-muted-foreground">
@@ -127,18 +125,20 @@ DashboardPage.Skeleton = function DashboardSkeleton() {
           formType="create"
           className={cn(buttonVariants(), "w-full mt-4 sm:mt-0 sm:w-auto")}
         >
-          <Loader2 className="h-4 w-4 animate-spin" />
+          <Plus className="h-4 w-4 mr-1" />
+          <span>New bank account</span>
         </BankAccountDialog>
       </div>
-      <div className="mt-4 sm:w-2/3 lg:w-1/2 divide-y divide-border">
+      <div className="mt-4 min-w-[256px] w-full divide-y divide-border">
         {Array.from({ length: 5 }).map((_, i) => (
           <div key={i} className="flex items-center justify-between py-4">
-            <div className="grid gap-1">
-              <Skeleton className="w-48 h-8" />
+            <div className="flex flex-col">
+              <Skeleton className="w-48 h-7 lg:h-8" />
+
               <div className="flex flex-row items-center mt-2 gap-4">
-                <Skeleton className="w-16 h-6" />
-                <Skeleton className="w-16 h-6" />
-                <Skeleton className="w-16 h-6" />
+                <Skeleton className="w-16 h-5 lg:h-6" />
+                <Skeleton className="w-16 h-5 lg:h-6" />
+                <Skeleton className="w-16 h-5 lg:h-6" />
               </div>
             </div>
           </div>
