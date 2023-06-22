@@ -62,7 +62,7 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
       <Button
         variant="outline"
         className={cn(
-          "relative h-9 w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 sm:w-40 lg:w-64"
+          "relative h-9 justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 w-40 lg:w-64"
         )}
         onClick={() => setOpen(true)}
         {...rest}
