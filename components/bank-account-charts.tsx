@@ -56,17 +56,47 @@ export function BankAccountCharts({
       </p>
       <Tabs defaultValue="incomes" className="mb-12">
         <TabsList>
-          <TabsTrigger value="incomes" onClick={() => setActiveTab("incomes")}>
+          <TabsTrigger
+            className="hidden sm:block"
+            value="incomes"
+            onClick={() => setActiveTab("incomes")}
+          >
             Incomes
           </TabsTrigger>
           <TabsTrigger
+            className="hidden sm:block"
             value="expenses"
             onClick={() => setActiveTab("expenses")}
           >
             Expenses
           </TabsTrigger>
-          <TabsTrigger value="savings" onClick={() => setActiveTab("savings")}>
+          <TabsTrigger
+            className="hidden sm:block"
+            value="savings"
+            onClick={() => setActiveTab("savings")}
+          >
             Savings
+          </TabsTrigger>
+          <TabsTrigger
+            className="block sm:hidden"
+            value="incomes"
+            onClick={() => setActiveTab("incomes")}
+          >
+            Inc.
+          </TabsTrigger>
+          <TabsTrigger
+            className="block sm:hidden"
+            value="expenses"
+            onClick={() => setActiveTab("expenses")}
+          >
+            Exp.
+          </TabsTrigger>
+          <TabsTrigger
+            className="block sm:hidden"
+            value="savings"
+            onClick={() => setActiveTab("savings")}
+          >
+            Sav.
           </TabsTrigger>
         </TabsList>
       </Tabs>
@@ -105,7 +135,7 @@ export function BankAccountCharts({
             <Tooltip
               content={<CustomTooltip />}
               cursor={{
-                fill: theme === "light" ? "#FDF1E7" : "#1C1E2B",
+                fill: theme === "dark" ? "#1C1E2B" : "#FDF1E7",
                 opacity: 0.7,
               }}
             />

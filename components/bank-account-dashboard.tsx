@@ -1,13 +1,22 @@
 import { cn } from "@/lib/utils"
 import { BankAccountWithTransactions } from "@/types"
-import { calculateSavings } from "@/utils/transactions"
+import { calculateSavingsPercentage } from "@/utils/transactions"
 import { TransactionType } from "@prisma/client"
+import exp from "constants"
 import { PiggyBank, TrendingDown, TrendingUp } from "lucide-react"
 import React from "react"
 import BankAccountPanel from "./bank-account-panel"
+import { Badge } from "./ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Heading } from "./ui/heading"
+import { Separator } from "./ui/separator"
 import { Skeleton } from "./ui/skeleton"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip"
 
 export default function BankAccountDashboard({
   bankAccount,
@@ -28,7 +37,7 @@ export default function BankAccountDashboard({
     return acc
   }, 0)
 
-  const savings = calculateSavings(incomes, expenses)
+  const savings = calculateSavingsPercentage(incomes, expenses)
   return (
     <div className="space-y-8 md:space-y-8">
       <div className="grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-3 gap-4 md:gap-8">
@@ -72,15 +81,36 @@ export default function BankAccountDashboard({
           </CardHeader>
           <CardContent>
             <div className="text-muted-foreground text-xs mb-1">SAVINGS</div>
-            <Heading
-              variant={"h2"}
-              className={cn(
-                "flex flex-row items-center gap-2",
-                savings > 0 ? "text-green-500" : "text-red-500"
-              )}
-            >
-              {savings} %
-            </Heading>
+            <div className="flex flex-row items-center gap-2">
+              <Heading
+                variant={"h2"}
+                className={cn("flex flex-row items-center gap-2")}
+              >
+                {incomes - expenses === 0 ? "" : incomes > expenses ? "+" : "-"}{" "}
+                {(incomes - expenses).toLocaleString()} €
+              </Heading>
+
+              <TooltipProvider>
+                <Tooltip delayDuration={300}>
+                  <TooltipTrigger asChild>
+                    <div className="inline-flex items-center gap-2">
+                      <Badge
+                        variant="outline"
+                        className={cn(
+                          "text-white",
+                          incomes > expenses ? "text-green-500" : "text-red-500"
+                        )}
+                      >
+                        {savings} %
+                      </Badge>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom">
+                    <p>Savings percentage of total</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </div>
           </CardContent>
         </Card>
       </div>

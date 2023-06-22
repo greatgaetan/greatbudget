@@ -1,5 +1,6 @@
 "use client"
 
+import { LayoutDashboard, LogOut, UserIcon } from "lucide-react"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
@@ -9,6 +10,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu"
@@ -31,30 +33,26 @@ export default function UserMenu({ user }: UserAccountNavProps) {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="dark:text-white" align="end">
-        <div className="flex items-center justify-start gap-2 p-2">
-          <div className="flex flex-col space-y-1 leading-none">
-            <span className="text-sm text-foreground">
-              Hello,
-              <br />
-            </span>
-            {user.name ? (
-              <p className="font-medium">{user.name}</p>
-            ) : user.email ? (
-              <p className="font-medium">{user.email}</p>
-            ) : (
-              <p className="font-medium">Unknown</p>
-            )}
-          </div>
-        </div>
+        <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <Link className="cursor-default" href="/profile">
+          <DropdownMenuItem className="gap-2">
+            <UserIcon className="h-4 w-4" />
+            Profile
+          </DropdownMenuItem>
+        </Link>
         <Link className="cursor-default" href="/dashboard">
-          <DropdownMenuItem>Dashboard</DropdownMenuItem>
+          <DropdownMenuItem className="gap-2">
+            <LayoutDashboard className="h-4 w-4" />
+            Dashboard
+          </DropdownMenuItem>
         </Link>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => signOut()}
-          className="text-destructive dark:text-red-500"
+          className="text-destructive dark:text-red-500 flex flex-row items-center gap-2"
         >
+          <LogOut className="h-4 w-4" />
           Sign out
         </DropdownMenuItem>
       </DropdownMenuContent>

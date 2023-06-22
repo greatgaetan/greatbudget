@@ -9,7 +9,7 @@ import "./globals.css"
 export const metadata = {
   title: {
     default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
+    template: `%s — ${siteConfig.name}`,
   },
   keywords: [
     "budget",

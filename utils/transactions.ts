@@ -1,7 +1,7 @@
 import { BankAccountWithTransactions, TransactionsFilter } from "@/types"
 import { TransactionType } from "@prisma/client"
 
-export function calculateSavings(
+export function calculateSavingsPercentage(
   totalIncome: number,
   totalExpenses: number
 ): number {

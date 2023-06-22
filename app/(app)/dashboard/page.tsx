@@ -44,8 +44,6 @@ export default async function DashboardPage() {
     },
   })
 
-  await new Promise((res, rej) => setTimeout(res, 1000))
-
   return (
     <div className="flex flex-col items-center md:w-[544px] lg:w-[768px] m-auto mt-8">
       <div className="flex flex-col sm:flex-row items-center justify-between w-full">

@@ -1,18 +1,12 @@
 "use client"
-
 import Link from "next/link"
-import {
-  usePathname,
-  useSelectedLayoutSegment,
-  useSelectedLayoutSegments,
-} from "next/navigation"
+import { usePathname } from "next/navigation"
 import * as React from "react"
 
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
 import { MainNavItem } from "@/types"
-import Logo from "./logo"
 
 interface MainNavProps {
   items?: MainNavItem[]
@@ -21,8 +15,6 @@ interface MainNavProps {
 
 export function MainNav({ items, children }: MainNavProps) {
   const path = usePathname()
-
-  const [showMobileMenu, setShowMobileMenu] = React.useState<boolean>(false)
 
   return (
     <div className="flex gap-6 md:gap-10">

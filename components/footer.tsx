@@ -1,11 +1,37 @@
-import * as React from "react"
+"use client"
 
+import { footerConfig } from "@/config/footer"
 import { cn } from "@/lib/utils"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
+import * as React from "react"
 import Logo from "./logo"
 import { ThemeToggle } from "./theme-toggle"
+import { Separator } from "./ui/separator"
 
 export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
+  const path = usePathname()
+
+  const renderLinks = () =>
+    footerConfig.mainNav.map((link, index) => (
+      <React.Fragment key={link.href}>
+        <Link
+          href={link.href}
+          className={cn(
+            "flex items-center text-sm font-medium transition-colors hover:text-foreground/80 sm:text-sm",
+            path.startsWith(link.href)
+              ? "text-foreground"
+              : "text-foreground/60"
+          )}
+        >
+          {link.title}
+        </Link>
+        {index < footerConfig.mainNav.length - 1 && (
+          <Separator className="w-px h-4 mx-2" orientation="vertical" />
+        )}
+      </React.Fragment>
+    ))
+
   return (
     <footer className={cn(className)}>
       <div className="container flex flex-col py-10 my-4 gap-4 md:py-0">
@@ -13,12 +39,19 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
           <Link href="/">
             <Logo height={32} width={32} />
           </Link>
+          <div className="hidden sm:flex flex-row text-sm items-center">
+            {renderLinks()}
+          </div>
           <ThemeToggle />
         </div>
-        <div className="flex flex-col">
-          <Link href="/about/project">The project</Link>
-          <Link href="/about/privacy">Privacy</Link>
-          <Link href="/about/terms">Terms</Link>
+        <div className="text-sm sm:text-center">
+          <div className="flex sm:hidden flex-row items-center mb-2">
+            {renderLinks()}
+          </div>
+          Dev with ❤️ by{" "}
+          <a href="https://www.greatgaetan.com" className="font-semibold">
+            @greatgaetan
+          </a>
         </div>
       </div>
     </footer>

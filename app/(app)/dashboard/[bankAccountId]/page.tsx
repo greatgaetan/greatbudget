@@ -86,7 +86,7 @@ export default async function BankAccountPage({
 
   return (
     <div>
-      <Badge variant="outline" className="m-0 md:hidden">
+      <Badge variant="outline" className="mb-4 md:hidden">
         🚀 <Separator className="mx-2 my-0 h-4" orientation="vertical" />{" "}
         {siteConfig.name} is easier to use on desktop
       </Badge>
