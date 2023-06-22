@@ -4,6 +4,7 @@ import { Toaster } from "@/components/ui/toaster"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Inter, Poppins } from "next/font/google"
+import Head from "next/head"
 import "./globals.css"
 
 export const metadata = {
@@ -53,6 +54,16 @@ export const metadata = {
   },
   manifest: `${siteConfig.url}/site.webmanifest`,
   description: siteConfig.description,
+  robots: process.env.NODE_ENV !== "production" && {
+    index: false,
+    follow: false,
+    nocache: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: false,
+    },
+  },
 }
 
 const inter = Inter({
