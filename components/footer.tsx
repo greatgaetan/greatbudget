@@ -38,6 +38,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
         <div className="flex flex-row items-center justify-between">
           <Link href="/">
             <Logo height={32} width={32} />
+            <span className="sr-only">greatbudget</span>
           </Link>
           <div className="hidden sm:flex flex-row text-sm items-center">
             {renderLinks()}
