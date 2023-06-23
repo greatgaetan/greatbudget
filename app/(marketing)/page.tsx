@@ -29,7 +29,11 @@ export default function Page() {
           </span>
         </div>
         <Balancer className="text-lg md:text-xl lg:text-2xl font-heading text-muted-foreground tracking-tighter">
-          Say goodbye to boring budgets and hello to delightful savings 🎉
+          Say goodbye to boring budgets and hello to{" "}
+          <mark className="dark:text-muted-foreground bg-transparent shadow-[inset_0_-0.5em_0_0_rgb(150,191,252)] dark:shadow-[inset_0_-0.6em_0_0_rgb(70,71,182)]">
+            delightful
+          </mark>{" "}
+          savings 🎉
         </Balancer>
       </div>
       <div className="mt-8 sm:p-6 md:p-12">
@@ -64,40 +68,6 @@ export default function Page() {
               }}
             />
           </AspectRatio>
-        </div>
-        <div className="mx-auto block md:hidden dark:hidden ">
-          <AspectRatio
-            ratio={8 / 16}
-            className="shadow-[0_0px_50px_rgba(8,_112,_184,_0.7)] rounded-xl"
-          >
-            <Image
-              src={"/images/mobile-dashboard-light-up.png"}
-              alt="greatbudget app screen"
-              className="rounded-md"
-              fill
-              style={{
-                objectFit: "contain",
-              }}
-            />
-          </AspectRatio>
-        </div>
-        <div className="md:hidden">
-          <div className="mx-auto hidden dark:block ">
-            <AspectRatio
-              ratio={8 / 16}
-              className="shadow-[0_0px_50px_rgba(8,_112,_184,_0.7)] rounded-xl"
-            >
-              <Image
-                src={"/images/mobile-dashboard-dark-up.png"}
-                alt="greatbudget app screen"
-                className="rounded-md"
-                fill
-                style={{
-                  objectFit: "contain",
-                }}
-              />
-            </AspectRatio>
-          </div>
         </div>
       </div>
     </div>
