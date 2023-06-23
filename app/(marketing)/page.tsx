@@ -30,7 +30,7 @@ export default function Page() {
         </div>
         <Balancer className="text-lg md:text-xl lg:text-2xl font-heading text-muted-foreground tracking-tighter">
           Say goodbye to boring budgets and hello to{" "}
-          <mark className="dark:text-muted-foreground bg-transparent shadow-[inset_0_-0.5em_0_0_rgb(150,191,252)] dark:shadow-[inset_0_-0.6em_0_0_rgb(70,71,182)]">
+          <mark className="text-muted-foreground bg-transparent shadow-[inset_0_-0.5em_0_0_rgb(150,191,252)] dark:shadow-[inset_0_-0.6em_0_0_rgb(70,71,182)]">
             delightful
           </mark>{" "}
           savings 🎉
