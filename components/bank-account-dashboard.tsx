@@ -11,6 +11,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Heading } from "./ui/heading"
 import { Separator } from "./ui/separator"
 import { Skeleton } from "./ui/skeleton"
+import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
 import {
   Tooltip,
   TooltipContent,
@@ -39,7 +40,7 @@ export default function BankAccountDashboard({
 
   const savings = calculateSavingsPercentage(incomes, expenses)
   return (
-    <div className="space-y-8 md:space-y-8">
+    <div className="space-y-8">
       <div className="grid grid-rows-3 grid-cols-1 md:grid-rows-1 md:grid-cols-3 gap-4 md:gap-8">
         <Card>
           <CardHeader>

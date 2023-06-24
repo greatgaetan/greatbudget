@@ -1,6 +1,6 @@
 "use client"
 
-import { LayoutDashboard, LogOut, UserIcon } from "lucide-react"
+import { BarChart2, LogOut, UserIcon } from "lucide-react"
 import { User } from "next-auth"
 import { signOut } from "next-auth/react"
 import Link from "next/link"
@@ -43,7 +43,7 @@ export default function UserMenu({ user }: UserAccountNavProps) {
         </Link>
         <Link className="cursor-default" href="/dashboard">
           <DropdownMenuItem className="gap-2">
-            <LayoutDashboard className="h-4 w-4" />
+            <BarChart2 className="h-4 w-4" />
             Dashboard
           </DropdownMenuItem>
         </Link>

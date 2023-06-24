@@ -16,11 +16,11 @@ import { cn } from "@/lib/utils"
 import { BankAccount } from "@prisma/client"
 import { DialogProps } from "@radix-ui/react-alert-dialog"
 import {
+  BarChart2,
   Bookmark,
   File,
   Landmark,
   Laptop,
-  LayoutDashboard,
   Moon,
   SunMedium,
   UserIcon,
@@ -119,7 +119,7 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
                   runCommand(() => router.push(`/dashboard`))
                 }}
               >
-                <LayoutDashboard className="mr-2 h-4 w-4" />
+                <BarChart2 className="mr-2 h-4 w-4" />
                 Dashboard
               </CommandItem>
             </CommandGroup>

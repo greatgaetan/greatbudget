@@ -19,7 +19,7 @@ export default function Page() {
       <div className="flex flex-col md:space-y-4">
         <div className="font-black font-heading text-4xl md:text-5xl lg:text-6xl tracking-tight">
           Goodbye <br className="block mobile:hidden" />
-          <span className="bg-clip-text bg-gradient-to-br from-red-600 dark:from-red-500 to-red-400 dark:to-red-800 text-transparent">
+          <span className="bg-clip-text bg-gradient-to-br from-primary to-muted dark:to-accent text-transparent">
             spreadsheets,
           </span>
           <br /> Welcome <br className="block mobile:hidden" />
