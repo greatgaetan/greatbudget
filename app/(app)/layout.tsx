@@ -34,7 +34,7 @@ export default async function DashboardLayout({
   return (
     <div className="flex min-h-screen flex-col space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
-        <div className="container md:flex h-16 items-center justify-between py-4">
+        <div className="container flex h-16 items-center justify-between py-4">
           <MainNav items={dashboardConfig.mainNav} />
           <div className="flex flex-row items-center gap-4">
             <CommandMenu
