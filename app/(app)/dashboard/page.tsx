@@ -70,7 +70,7 @@ export default async function DashboardPage() {
             >
               <div className="flex flex-col">
                 <Link
-                  href={`/dashboard/${bankAccount.id}`}
+                  href={`/dashboard/${bankAccount.id}/#top`}
                   className={cn(
                     headingVariants({ variant: "h2" }),
                     "lg:hover:text-foreground lg:text-muted-foreground text-foreground"

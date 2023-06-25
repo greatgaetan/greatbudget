@@ -2,16 +2,13 @@ import { cn } from "@/lib/utils"
 import { BankAccountWithTransactions } from "@/types"
 import { calculateSavingsPercentage } from "@/utils/transactions"
 import { TransactionType } from "@prisma/client"
-import exp from "constants"
 import { PiggyBank, TrendingDown, TrendingUp } from "lucide-react"
 import React from "react"
 import BankAccountPanel from "./bank-account-panel"
 import { Badge } from "./ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card"
 import { Heading } from "./ui/heading"
-import { Separator } from "./ui/separator"
 import { Skeleton } from "./ui/skeleton"
-import { Tabs, TabsList, TabsTrigger } from "./ui/tabs"
 import {
   Tooltip,
   TooltipContent,

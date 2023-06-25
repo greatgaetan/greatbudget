@@ -102,7 +102,7 @@ export function BankAccountCharts({
       </Tabs>
       {noTransactions ? (
         <div className="col-span-3 border border-dashed text-accent-foreground flex items-center justify-center rounded-lg row-auto h-[400px]">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-center">
             <div className="bg-accent p-4 rounded-full mb-4">
               <BarChartBig className="h-8 w-8" />
             </div>

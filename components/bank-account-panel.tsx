@@ -32,9 +32,24 @@ BankAccountPanel.Skeleton = function BankAccountPanelSkeleton() {
           </p>
           <Tabs defaultValue="incomes" className="mb-12">
             <TabsList>
-              <TabsTrigger value="incomes">Incomes</TabsTrigger>
-              <TabsTrigger value="expenses">Expenses</TabsTrigger>
-              <TabsTrigger value="savings">Savings</TabsTrigger>
+              <TabsTrigger className="hidden sm:block" value="incomes">
+                Incomes
+              </TabsTrigger>
+              <TabsTrigger className="hidden sm:block" value="expenses">
+                Expenses
+              </TabsTrigger>
+              <TabsTrigger className="hidden sm:block" value="savings">
+                Savings
+              </TabsTrigger>
+              <TabsTrigger className="block sm:hidden" value="incomes">
+                Inc.
+              </TabsTrigger>
+              <TabsTrigger className="block sm:hidden" value="expenses">
+                Exp.
+              </TabsTrigger>
+              <TabsTrigger className="block sm:hidden" value="savings">
+                Sav.
+              </TabsTrigger>
             </TabsList>
           </Tabs>
         </div>
