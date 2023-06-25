@@ -4,7 +4,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft } from "lucide-react"
 import Link from "next/link"
 import React from "react"
 
