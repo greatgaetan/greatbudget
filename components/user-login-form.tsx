@@ -54,8 +54,6 @@ export default function UserLoginForm() {
     })
     setIsLoading(false)
 
-    console.log("result", result)
-
     if (!result?.ok || result?.error) {
       return toast({
         title: "Something went wrong.",

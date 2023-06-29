@@ -84,8 +84,10 @@ export default function BankAccountDashboard({
                 variant={"h2"}
                 className={cn("flex flex-row items-center gap-2")}
               >
-                {incomes - expenses === 0 ? "" : incomes > expenses ? "+" : "-"}{" "}
-                {(incomes - expenses).toLocaleString()} €
+                {incomes - expenses === 0
+                  ? ""
+                  : (incomes - expenses).toLocaleString()}{" "}
+                €
               </Heading>
 
               <TooltipProvider>
@@ -104,7 +106,7 @@ export default function BankAccountDashboard({
                     </div>
                   </TooltipTrigger>
                   <TooltipContent side="bottom">
-                    <p>Savings percentage of total</p>
+                    <p>Percentage of savings</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
