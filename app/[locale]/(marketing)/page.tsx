@@ -1,10 +1,9 @@
-import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { buttonVariants } from "@/components/ui/button"
 import { Heading, headingVariants } from "@/components/ui/heading"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { Lightbulb, Sun } from "lucide-react"
 import { Metadata } from "next"
+import { useTranslations } from "next-intl"
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
@@ -16,11 +15,14 @@ export const metadata: Metadata = {
 }
 
 export default function Page() {
+  const t = useTranslations("Index")
+
   return (
     <div className="mt-4 container">
       <div className="relative flex flex-col items-center justify-center overflow-hidden rounded-3xl h-[70vh] sm:h-[500px] md:h-[700px] bg-[conic-gradient(at_bottom_right,_var(--tw-gradient-stops))] from-emerald-300 via-fuchsia-600 to-teal-200">
         <div className="absolute inset-0 bg-[url(https://grainy-gradients.vercel.app/noise.svg)] opacity-25 brightness-100 contrast-150"></div>
         <div className="z-40 p-8">
+          <p>{t("title")}</p>
           <div className="font-black text-white font-heading text-4xl md:text-5xl lg:text-6xl tracking-tight">
             Goodbye <br className="block [@media(min-width:556px)]:hidden" />
             <span className="bg-clip-text bg-gradient-to-br from-blue-400 to-accent-foreground dark:to-accent text-transparent">

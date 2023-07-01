@@ -1,11 +1,12 @@
 import { BankAccount, User } from "@prisma/client"
-import { notFound, redirect } from "next/navigation"
+import { notFound } from "next/navigation"
 
 import BankAccountDashboard from "@/components/bank-account-dashboard"
 import { authOptions } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { getCurrentUser } from "@/lib/session"
 import { BankAccountWithTransactions } from "@/types"
+import { redirect } from "next-intl/server"
 
 async function getBankAccountsForUser(
   bankAccountId: BankAccount["id"],

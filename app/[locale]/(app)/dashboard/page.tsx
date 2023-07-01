@@ -11,8 +11,9 @@ import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { ArrowLeftRight, CalendarPlus, Edit, Loader2, Plus } from "lucide-react"
 import { Metadata } from "next"
+import { redirect } from "next-intl/server"
 import Link from "next/link"
-import { redirect } from "next/navigation"
+
 import React from "react"
 
 export const metadata: Metadata = {
