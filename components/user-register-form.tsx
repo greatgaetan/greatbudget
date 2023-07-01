@@ -82,6 +82,7 @@ export default function UserRegisterForm() {
       toast({
         title: "Success",
         description: `Your account has been created. Welcome ${message.name}! You will be redirected to the login page.`,
+        variant: "success",
       })
       setTimeout(() => {
         router.push("/login")

@@ -65,6 +65,7 @@ export default function UserLoginForm() {
     toast({
       title: "Successfully logged in",
       description: "You are now logged in. Redirecting you to the dashboard.",
+      variant: "success",
       duration: 3000,
     })
     router.push("/dashboard")

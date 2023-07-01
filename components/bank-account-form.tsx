@@ -83,6 +83,7 @@ export default function BankAccountForm(props: BankAccountFormProps) {
       toast({
         title: "Success",
         description: successMessage,
+        variant: "success",
       })
       router.refresh()
     } catch (error) {

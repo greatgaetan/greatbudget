@@ -119,6 +119,7 @@ export default function TransactionForm(props: TransactionFormProps) {
       toast({
         title: "Success",
         description: successMessage,
+        variant: "success",
       })
       router.refresh()
     } catch (error) {

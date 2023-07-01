@@ -79,6 +79,7 @@ export function DataTableRowActions<TData>({
       toast({
         title: "Success",
         description: `Successfully deleted ${selectedRows.length} transaction(s).`,
+        variant: "success",
       })
       router.refresh()
       return true
@@ -99,6 +100,7 @@ export function DataTableRowActions<TData>({
       toast({
         title: "Success",
         description: `Successfully deleted 1 transaction.`,
+        variant: "success",
       })
       return true
     } else {
