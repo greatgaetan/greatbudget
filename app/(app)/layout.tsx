@@ -36,7 +36,7 @@ export default async function DashboardLayout({
       <header className="sticky top-0 z-40 border-b bg-background">
         <div className="container flex h-16 items-center justify-between py-4">
           <MainNav items={dashboardConfig.mainNav} />
-          <div className="flex flex-row items-center gap-4">
+          <div className="flex flex-row flex-1 md:flex-none items-center gap-4">
             <CommandMenu
               userIsAuthentified={!!user}
               bankAccounts={bankAccounts}

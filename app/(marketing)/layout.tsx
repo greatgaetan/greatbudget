@@ -36,7 +36,7 @@ export default async function MarketingLayout({
       <header className="container z-40 bg-background">
         <div className="flex h-20 items-center justify-between py-6">
           <MainNav items={marketingConfig.mainNav} />
-          <div className="flex flex-row items-center gap-4">
+          <div className="flex flex-row flex-1 md:flex-none items-center gap-4">
             <CommandMenu
               userIsAuthentified={!!user}
               bankAccounts={bankAccounts}

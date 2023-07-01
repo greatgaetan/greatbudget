@@ -58,11 +58,11 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
   }, [])
 
   return (
-    <>
+    <div className="flex-grow">
       <Button
         variant="outline"
         className={cn(
-          "relative h-9 justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 w-40 lg:w-64"
+          "relative h-9 justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:pr-12 w-full md:w-64"
         )}
         onClick={() => setOpen(true)}
         {...rest}
@@ -173,6 +173,6 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
           </CommandGroup>
         </CommandList>
       </CommandDialog>
-    </>
+    </div>
   )
 }

@@ -1,6 +1,6 @@
 import { AspectRatio } from "@/components/ui/aspect-ratio"
 import { buttonVariants } from "@/components/ui/button"
-import { Heading } from "@/components/ui/heading"
+import { Heading, headingVariants } from "@/components/ui/heading"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 import { Lightbulb, Sun } from "lucide-react"
@@ -74,7 +74,7 @@ export default function Page() {
           <div className="flex flex-row h-full items-center justify-around gap-4">
             <div className="sm:w-4/6 space-y-6">
               <Heading variant={"h3"}>
-                Set up your goals to achieve your savings target
+                Complete statistics on your spending
               </Heading>
               <Balancer>
                 You can set up the goals you want to achieve for a specific
@@ -90,18 +90,18 @@ export default function Page() {
                 be able to achieve your goals in no time!
               </Balancer>
             </div>
-            <div className="hidden sm:block relative w-48 h-48">
+            <div className="hidden sm:block relative w-44 h-44">
               <Image
-                src={"/images/more.svg"}
+                src={"/images/chart-iso-color.png"}
                 fill
                 style={{ objectFit: "contain" }}
                 alt="statistics icon"
               />
             </div>
           </div>
-          <div className="block sm:hidden relative mx-auto w-48 h-48">
+          <div className="block sm:hidden relative mx-auto w-44 h-44 mt-8">
             <Image
-              src={"/images/more.svg"}
+              src={"/images/chart-iso-color.png"}
               fill
               style={{ objectFit: "contain" }}
               alt="statistics icon"
@@ -120,7 +120,7 @@ export default function Page() {
             </Balancer>
             <div className="relative w-24 h-24">
               <Image
-                src={"/images/search.svg"}
+                src={"/images/zoom-dynamic-color.png"}
                 fill
                 style={{ objectFit: "contain" }}
                 alt="search icon"
@@ -136,7 +136,7 @@ export default function Page() {
             </Balancer>
             <div className="relative w-24 h-24">
               <Image
-                src={"/images/heart.svg"}
+                src={"/images/heart-front-color.png"}
                 fill
                 style={{ objectFit: "contain" }}
                 alt="heart icon"
@@ -147,9 +147,9 @@ export default function Page() {
         <div className="col-span-2 row-span-2 xl:col-start-2 lg:row-start-4 xl:row-start-3 bg-slate-100 dark:bg-slate-900 rounded-lg p-8">
           <div className="flex flex-row h-full items-center justify-around gap-4">
             <div className="sm:w-4/6 space-y-6">
-              <Heading variant={"h3"}>
+              <Balancer className={headingVariants({ variant: "h3" })}>
                 Set up your goals to achieve your savings target
-              </Heading>
+              </Balancer>
               <Balancer>
                 You can set up the goals you want to achieve for a specific
                 category and we will help you to achieve them.
@@ -166,16 +166,16 @@ export default function Page() {
             </div>
             <div className="hidden sm:block relative w-48 h-48">
               <Image
-                src={"/images/badge.svg"}
+                src={"/images/trophy-dynamic-premium.png"}
                 fill
                 style={{ objectFit: "contain" }}
                 alt="badge icon"
               />
             </div>
           </div>
-          <div className="block sm:hidden relative mx-auto w-48 h-48">
+          <div className="block sm:hidden relative mx-auto w-44 h-44 mt-8">
             <Image
-              src={"/images/badge.svg"}
+              src={"/images/trophy-dynamic-premium.png"}
               fill
               style={{ objectFit: "contain" }}
               alt="badge icon"
@@ -190,7 +190,7 @@ export default function Page() {
             </Balancer>
             <div className="relative w-24 h-24">
               <Image
-                src={"/images/location.svg"}
+                src={"/images/notebook-iso-color.png"}
                 fill
                 style={{ objectFit: "contain" }}
                 alt="heart icon"
@@ -204,9 +204,17 @@ export default function Page() {
               Choose between our Light and Dark modes to satisfy your
               requirements.
             </Balancer>
-            <div className="relative w-24 h-24">
+            <div className="relative dark:absolute w-24 h-24 dark:w-0 dark:h-0">
               <Image
-                src={"/images/mountain-with-sun.svg"}
+                src={"/images/sun-dynamic-color.png"}
+                fill
+                style={{ objectFit: "contain" }}
+                alt="moutain with sun icon"
+              />
+            </div>
+            <div className="absolute dark:relative w-0 h-0 dark:w-24 dark:h-24">
+              <Image
+                src={"/images/moon-dynamic-color.png"}
                 fill
                 style={{ objectFit: "contain" }}
                 alt="moutain with sun icon"
