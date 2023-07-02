@@ -1,5 +1,24 @@
 {
-  "Index": {
-    "title": "Hello world!"
+  "home": {
+    "goodbye": "Goodbye",
+    "spreadsheets": "spreadsheets",
+    "welcome": "Welcome",
+    "hero-paragraph": "Say goodbye to boring budgets and hello to delightful savings 🎉",
+    "hero-cta": "Get started",
+    "hero-cta-2": "— it's free",
+    "features-title": "Everything for you",
+    "features-stats-title": "Complete statistics on your spending",
+    "features-stats-description-1": "You can set up the goals you want to achieve for a specific category and we will help you to achieve them.",
+    "features-stats-description-2": "Based on your goals, we will warn you if you are spending too much in a category to help you to achieve your goals.",
+    "features-stats-description-3": "This system is completely customizable and you can set up as many goals as you want. With the gratification system, you will be able to achieve your goals in no time!",
+    "features-search-1": "Built-in search tool to find anything you need in the app. Just press",
+    "features-search-2": "to open it.",
+    "features-feedback": "Lot of love to make your experience delightful. We are always open to your feedback!",
+    "features-goals-title": "Set up your goals to achieve your savings target",
+    "features-goals-description-1": "You can set up the goals you want to achieve for a specific category and we will help you to achieve them.",
+    "features-goals-description-2": "Based on your goals, we will warn you if you are spending too much in a category to help you to achieve your goals.",
+    "features-goals-description-3": "This system is completely customizable and you can set up as many goals as you want. With the gratification system, you will be able to achieve your goals in no time!",
+    "features-multilanguage": "Multiple languages supported. Currently English and French. Aiming to support a lot more in the future!",
+    "features-themes": "An app that suits you. Choose between our Light and Dark modes to satisfy your requirements."
   }
 }

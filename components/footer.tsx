@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import * as React from "react"
+import { LanguageSwitcher } from "./languague-switcher"
 import Logo from "./logo"
 import { ThemeToggle } from "./theme-toggle"
 import { Separator } from "./ui/separator"
@@ -35,15 +36,20 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
     <footer className={cn(className)}>
       <div className="container flex flex-col py-10 my-4 gap-4 md:py-0">
-        <div className="flex flex-row items-center justify-between">
-          <Link href="/">
-            <Logo height={32} width={32} />
-            <span className="sr-only">greatbudget</span>
-          </Link>
-          <div className="hidden sm:flex flex-row text-sm items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 items-center">
+          <div className="flex flex-row justify-start items-center">
+            <Link href="/">
+              <Logo height={32} width={32} />
+              <span className="sr-only">greatbudget</span>
+            </Link>
+          </div>
+          <div className="hidden sm:flex flex-row text-sm items-center justify-center">
             {renderLinks()}
           </div>
-          <ThemeToggle />
+          <div className="flex flex-row justify-end items-center space-x-4">
+            <LanguageSwitcher />
+            <ThemeToggle />
+          </div>
         </div>
         <div className="text-sm sm:text-center">
           <div className="flex sm:hidden flex-row items-center mb-2">

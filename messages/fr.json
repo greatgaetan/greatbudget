@@ -1,5 +1,24 @@
 {
-  "Index": {
-    "title": "Bonjour le monde !"
+  "home": {
+    "goodbye": "Fini les",
+    "spreadsheets": "tableurs",
+    "welcome": "place à",
+    "hero-paragraph": "Dites adieu aux budgets ennuyeux et bonjour aux délicieuses économies 🎉",
+    "hero-cta": "Commencez",
+    "hero-cta-2": "— c'est gratuit",
+    "features-title": "Tout pour vous",
+    "features-stats-title": "Statistiques complètes sur vos dépenses",
+    "features-stats-description-1": "Vous pouvez définir les objectifs que vous souhaitez atteindre pour une catégorie spécifique et nous vous aiderons à les atteindre.",
+    "features-stats-description-2": "En fonction de vos objectifs, nous vous alerterons si vous dépensez trop dans une catégorie pour vous aider à atteindre vos objectifs.",
+    "features-stats-description-3": "Ce système est entièrement personnalisable et vous pouvez définir autant d'objectifs que vous le souhaitez. Avec le système de gratification, vous pourrez atteindre vos objectifs en un rien de temps!",
+    "features-search-1": "Outil de recherche intégré pour trouver tout ce dont vous avez besoin dans l'application. Appuyez simplement sur",
+    "features-search-2": "pour l'ouvrir.",
+    "features-feedback": "Beaucoup d'amour pour rendre votre expérience agréable. Nous sommes toujours à votre écoute!",
+    "features-goals-title": "Définissez vos objectifs pour atteindre votre cible d'économies",
+    "features-goals-description-1": "Vous pouvez définir les objectifs que vous souhaitez atteindre pour une catégorie spécifique et nous vous aiderons à les atteindre.",
+    "features-goals-description-2": "En fonction de vos objectifs, nous vous alerterons si vous dépensez trop dans une catégorie pour vous aider à atteindre vos objectifs.",
+    "features-goals-description-3": "Ce système est entièrement personnalisable et vous pouvez définir autant d'objectifs que vous le souhaitez. Avec le système de gratification, vous pourrez atteindre vos objectifs en un rien de temps!",
+    "features-multilanguage": "Plusieurs langues supportées. Actuellement l'anglais et le français avec pour objectif d'en couvrir beaucoup plus à l'avenir!",
+    "features-themes": "Une app qui vous correspond. Choisissez entre nos modes Clair et Sombre pour satisfaire vos besoins."
   }
 }
