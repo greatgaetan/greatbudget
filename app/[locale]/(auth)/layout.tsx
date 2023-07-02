@@ -5,8 +5,10 @@ import Link from "next/link"
 
 export default function AuthLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: { locale: string }
 }) {
   return (
     <div className="min-h-screen">
@@ -20,7 +22,7 @@ export default function AuthLayout({
         >
           <>
             <ChevronLeft className="mr-2 h-4 w-4" />
-            Back
+            {params.locale === "fr" ? "Retour" : "Back"}
           </>
         </Link>
         {children}

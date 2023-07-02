@@ -20,5 +20,15 @@
     "features-goals-description-3": "Ce système est entièrement personnalisable et vous pouvez définir autant d'objectifs que vous le souhaitez. Avec le système de gratification, vous pourrez atteindre vos objectifs en un rien de temps!",
     "features-multilanguage": "Plusieurs langues supportées. Actuellement l'anglais et le français avec pour objectif d'en couvrir beaucoup plus à l'avenir!",
     "features-themes": "Une app qui vous correspond. Choisissez entre nos modes Clair et Sombre pour satisfaire vos besoins."
+  },
+  "login": {
+    "title": "Bon retour parmi nous!",
+    "subtitle": "Entrer vos informations personnelles pour vous connecter",
+    "to-register": "Pas encore de compte? Inscrivez-vous"
+  },
+  "register": {
+    "title": "Créer un compte",
+    "subtitle": "Entrer vos informations personnelles pour vous inscrire",
+    "to-login": "Déjà un compte? Connectez-vous"
   }
 }

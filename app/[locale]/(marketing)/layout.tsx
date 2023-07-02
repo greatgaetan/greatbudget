@@ -14,11 +14,12 @@ import { ChevronRight } from "lucide-react"
 
 export default async function MarketingLayout({
   children,
+  params,
 }: {
   children: React.ReactNode
+  params: { locale: string }
 }) {
   const user = await getCurrentUser()
-
   const bankAccounts =
     user &&
     ((await db.bankAccount.findMany({
@@ -50,7 +51,7 @@ export default async function MarketingLayout({
                     "px-4 group hover:no-underline"
                   )}
                 >
-                  Login
+                  {params.locale === "fr" ? "Connexion" : "Login"}
                   <ChevronRight className="h-4 w-4 translate-x-1 group-hover:translate-x-2 transition-transform ease-in-out" />
                 </Link>
               ) : (

@@ -20,5 +20,15 @@
     "features-goals-description-3": "This system is completely customizable and you can set up as many goals as you want. With the gratification system, you will be able to achieve your goals in no time!",
     "features-multilanguage": "Multiple languages supported. Currently English and French. Aiming to support a lot more in the future!",
     "features-themes": "An app that suits you. Choose between our Light and Dark modes to satisfy your requirements."
+  },
+  "login": {
+    "title": "Welcome back",
+    "subtitle": "Enter your credentials to log in",
+    "to-register": "Don't have an account? Sign Up"
+  },
+  "register": {
+    "title": "Create an account",
+    "subtitle": "Enter your personal informations to create an account",
+    "to-login": "Already have an account? Sign In"
   }
 }
