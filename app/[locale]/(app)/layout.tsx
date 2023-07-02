@@ -35,7 +35,10 @@ export default async function DashboardLayout({
     <div className="flex min-h-screen flex-col space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
         <div className="container flex h-16 items-center justify-between py-4">
-          <MainNav items={dashboardConfig.mainNav} />
+          <MainNav
+            items={dashboardConfig.mainNav}
+            configKey="dashboard-config"
+          />
           <div className="flex flex-row flex-1 md:flex-none items-center gap-4">
             <CommandMenu
               userIsAuthentified={!!user}

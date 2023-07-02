@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import React from "react"
 import { useForm } from "react-hook-form"
@@ -18,35 +19,37 @@ import {
 import { Input } from "./ui/input"
 import { toast } from "./ui/use-toast"
 
-const password = z
-  .string()
-  .min(8, {
-    message: "Please enter a password of at least 8 characters.",
-  })
-  .max(50, {
-    message: "Please enter a password of at most 50 characters.",
-  })
-
-const formSchema = z
-  .object({
-    email: z.string().email({
-      message: "Please enter a valid email address.",
-    }),
-    password: password,
-    confirmPassword: password,
-    name: z.string().min(2, {
-      message: "Please enter a name of at least 2 characters.",
-    }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"], // path of error
-  })
-
 export default function UserRegisterForm() {
   const [isLoading, setIsLoading] = React.useState(false)
   const [requestSucceeded, setRequestSucceeded] = React.useState(false)
   const router = useRouter()
+  const t = useTranslations("user-register-form")
+  const toastT = useTranslations("toast")
+  const password = z
+    .string()
+    .min(8, {
+      message: t("password-error-message-min"),
+    })
+    .max(50, {
+      message: t("password-error-message-max"),
+    })
+
+  const formSchema = z
+    .object({
+      email: z.string().email({
+        message: t("email-error-message"),
+      }),
+      password: password,
+      confirmPassword: password,
+      name: z.string().min(2, {
+        message: t("name-error-message-min"),
+      }),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: t("confirm-password-error-message"),
+      path: ["confirmPassword"], // path of error
+    })
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -71,7 +74,7 @@ export default function UserRegisterForm() {
 
       if (!response.ok) {
         toast({
-          title: "Error",
+          title: toastT("error-title-default"),
           description: message,
           variant: "destructive",
         })
@@ -80,8 +83,8 @@ export default function UserRegisterForm() {
 
       setRequestSucceeded(true)
       toast({
-        title: "Success",
-        description: `Your account has been created. Welcome ${message.name}! You will be redirected to the login page.`,
+        title: toastT("success-title-default"),
+        description: toastT("success-register-account-created"),
         variant: "success",
       })
       setTimeout(() => {
@@ -89,8 +92,8 @@ export default function UserRegisterForm() {
       }, 2000)
     } catch (error) {
       toast({
-        title: "Unexpected error",
-        description: "An error occurred. Please try again later.",
+        title: toastT("error-title-default"),
+        description: toastT("error-description-default"),
         variant: "destructive",
       })
     } finally {
@@ -106,7 +109,7 @@ export default function UserRegisterForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your email</FormLabel>
+              <FormLabel>{t("email-label")}</FormLabel>
               <FormControl>
                 <Input
                   type="email"
@@ -127,11 +130,11 @@ export default function UserRegisterForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("password-label")}</FormLabel>
               <FormControl>
                 <Input
                   type="password"
-                  placeholder="Your super secret password"
+                  placeholder={t("password-placeholder")}
                   disabled={isLoading}
                   {...field}
                 />
@@ -145,11 +148,11 @@ export default function UserRegisterForm() {
           name="confirmPassword"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Confirm Password</FormLabel>
+              <FormLabel>{t("confirm-password-label")}</FormLabel>
               <FormControl>
                 <Input
                   type="password"
-                  placeholder="One more time for safety"
+                  placeholder={t("confirm-password-placeholder")}
                   disabled={isLoading}
                   {...field}
                 />
@@ -163,11 +166,11 @@ export default function UserRegisterForm() {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your name</FormLabel>
+              <FormLabel>{t("name-label")}</FormLabel>
               <FormControl>
                 <Input
                   type="text"
-                  placeholder="What should we call you?"
+                  placeholder={t("name-placeholder")}
                   disabled={isLoading}
                   {...field}
                 />
@@ -181,8 +184,8 @@ export default function UserRegisterForm() {
           type="submit"
           disabled={isLoading || requestSucceeded}
         >
-          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Sign
-          Up
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {t("submit-button")}
         </Button>
       </form>
     </Form>

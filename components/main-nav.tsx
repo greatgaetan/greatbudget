@@ -7,14 +7,17 @@ import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
 
 import { MainNavItem } from "@/types"
+import { useTranslations } from "next-intl"
 
 interface MainNavProps {
   items?: MainNavItem[]
   children?: React.ReactNode
+  configKey: string
 }
 
-export function MainNav({ items, children }: MainNavProps) {
+export function MainNav({ items, children, configKey }: MainNavProps) {
   const path = usePathname()
+  const t = useTranslations(configKey)
 
   return (
     <div className="hidden md:flex gap-6 md:gap-10">
@@ -37,7 +40,7 @@ export function MainNav({ items, children }: MainNavProps) {
                 item.disabled && "cursor-not-allowed opacity-80"
               )}
             >
-              {item.title}
+              {t(item.key)}
             </Link>
           ))}
         </nav>

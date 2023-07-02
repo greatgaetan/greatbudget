@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader, Loader2 } from "lucide-react"
 import { signIn } from "next-auth/react"
+import { useTranslations } from "next-intl"
 import { useRouter } from "next/navigation"
 import React from "react"
 import { set, useForm } from "react-hook-form"
@@ -20,21 +21,22 @@ import {
 import { Input } from "./ui/input"
 import { toast } from "./ui/use-toast"
 
-const formSchema = z.object({
-  email: z.string().email({
-    message: "Please enter a valid email address.",
-  }),
-  password: z
-    .string()
-    .min(8, {
-      message: "Please enter a password of at least 8 characters.",
-    })
-    .max(50, {
-      message: "Please enter a password of at most 50 characters.",
-    }),
-})
-
 export default function UserLoginForm() {
+  const t = useTranslations("user-login-form")
+  const toastT = useTranslations("toast")
+  const formSchema = z.object({
+    email: z.string().email({
+      message: t("email-error-message"),
+    }),
+    password: z
+      .string()
+      .min(8, {
+        message: t("password-error-message-min"),
+      })
+      .max(50, {
+        message: t("password-error-message-max"),
+      }),
+  })
   const [isLoading, setIsLoading] = React.useState(false)
   const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
@@ -56,15 +58,15 @@ export default function UserLoginForm() {
 
     if (!result?.ok || result?.error) {
       return toast({
-        title: "Something went wrong.",
-        description: "Your email or password is incorrect. Please try again.",
+        title: toastT("error-title-default"),
+        description: toastT("error-login-form"),
         variant: "destructive",
       })
     }
 
     toast({
-      title: "Successfully logged in",
-      description: "You are now logged in. Redirecting you to the dashboard.",
+      title: toastT("success-login-title"),
+      description: toastT("success-login-description"),
       variant: "success",
       duration: 3000,
     })
@@ -79,7 +81,7 @@ export default function UserLoginForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Your email</FormLabel>
+              <FormLabel>{t("email-label")}</FormLabel>
               <FormControl>
                 <Input
                   type="email"
@@ -100,11 +102,11 @@ export default function UserLoginForm() {
           name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Password</FormLabel>
+              <FormLabel>{t("password-label")}</FormLabel>
               <FormControl>
                 <Input
                   type="password"
-                  placeholder="Your super secret password"
+                  placeholder={t("password-placeholder")}
                   autoComplete="current-password"
                   disabled={isLoading}
                   {...field}
@@ -115,8 +117,8 @@ export default function UserLoginForm() {
           )}
         />
         <Button className="w-full" type="submit">
-          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Sign
-          In
+          {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {t("submit-button")}
         </Button>
       </form>
     </Form>

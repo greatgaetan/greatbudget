@@ -2,6 +2,7 @@
 
 import { footerConfig } from "@/config/footer"
 import { cn } from "@/lib/utils"
+import { useTranslations } from "next-intl"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import * as React from "react"
@@ -12,7 +13,7 @@ import { Separator } from "./ui/separator"
 
 export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
   const path = usePathname()
-
+  const t = useTranslations("footer-config")
   const renderLinks = () =>
     footerConfig.mainNav.map((link, index) => (
       <React.Fragment key={link.href}>
@@ -25,7 +26,7 @@ export function Footer({ className }: React.HTMLAttributes<HTMLElement>) {
               : "text-foreground/60"
           )}
         >
-          {link.title}
+          {t(link.key)}
         </Link>
         {index < footerConfig.mainNav.length - 1 && (
           <Separator className="w-px h-4 mx-2" orientation="vertical" />

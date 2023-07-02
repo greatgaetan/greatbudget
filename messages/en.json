@@ -30,5 +30,66 @@
     "title": "Create an account",
     "subtitle": "Enter your personal informations to create an account",
     "to-login": "Already have an account? Sign In"
+  },
+  "dashboard-config": {
+    "dashboard": "Dashboard"
+  },
+  "footer-config": {
+    "project": "Project",
+    "privacy": "Privacy",
+    "terms": "Terms"
+  },
+  "marketing-config": {
+    "features": "Features",
+    "pricing": "Pricing"
+  },
+  "command-config": {
+    "search": "Search...",
+    "search-placeholder": "Type a command or search...",
+    "no-results": "No results found.",
+    "links-section": "Links",
+    "home": "Home",
+    "my-account-section": "My account",
+    "user-profile": "Profile",
+    "user-dashboard": "Dashboard",
+    "bank-account-section": "Bank accounts",
+    "about-section": "About",
+    "theme-section": "Theme",
+    "theme-light": "Light",
+    "theme-dark": "Dark",
+    "theme-system": "System"
+  },
+  "user-login-form": {
+    "email-error-message": "Please enter a valid email address.",
+    "password-error-message-min": "Password must be at least 8 characters long.",
+    "password-error-message-max": "Password must be at most 50 characters long.",
+    "email-label": "Your email",
+    "password-label": "Your password",
+    "password-placeholder": "Your super secret password",
+    "submit-button": "Sign In"
+  },
+  "user-register-form": {
+    "email-error-message": "Please enter a valid email address.",
+    "password-error-message-min": "Password must be at least 8 characters long.",
+    "password-error-message-max": "Password must be at most 50 characters long.",
+    "confirm-password-error-message": "Passwords must match.",
+    "name-error-message-min": "Please enter a name of at least 2 characters.",
+    "email-label": "Your email",
+    "password-label": "Your password",
+    "password-placeholder": "Your super secret password",
+    "confirm-password-label": "Confirm your password",
+    "confirm-password-placeholder": "One more time for safety",
+    "name-label": "Your name",
+    "name-placeholder": "What should we call you?",
+    "submit-button": "Sign Up"
+  },
+  "toast": {
+    "error-title-default": "Something went wrong",
+    "error-description-default": "Please try again later.",
+    "error-login-form": "Please check your credentials and try again.",
+    "success-title-default": "Success",
+    "success-login-title": "Successfully logged in",
+    "success-login-description": "You are now logged in. Redirecting you to the dashboard.",
+    "success-register-account-created": "Your account has been created. You will be redirected to the login page."
   }
 }

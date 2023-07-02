@@ -25,6 +25,7 @@ import {
   SunMedium,
   UserIcon,
 } from "lucide-react"
+import { useTranslations } from "next-intl"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
 import * as React from "react"
@@ -35,6 +36,9 @@ type CommandeMenuProps = DialogProps & {
 }
 
 export function CommandMenu({ ...props }: CommandeMenuProps) {
+  const marketingTranslate = useTranslations("marketing-config")
+  const footerTranslate = useTranslations("footer-config")
+  const commandTranslate = useTranslations("command-config")
   const { userIsAuthentified, bankAccounts, ...rest } = props
   const router = useRouter()
   const [open, setOpen] = React.useState(false)
@@ -67,16 +71,16 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
         onClick={() => setOpen(true)}
         {...rest}
       >
-        <span className="inline-flex">Search...</span>
+        <span className="inline-flex">{commandTranslate("search")}</span>
         <kbd className="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
       <CommandDialog open={open} onOpenChange={setOpen}>
-        <CommandInput placeholder="Type a command or search..." />
+        <CommandInput placeholder={commandTranslate("search-placeholder")} />
         <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Links">
+          <CommandEmpty>{commandTranslate("no-results")}</CommandEmpty>
+          <CommandGroup heading={commandTranslate("links-section")}>
             <CommandItem
               key={"home"}
               value={"Home"}
@@ -85,23 +89,23 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
               }}
             >
               <File className="mr-2 h-4 w-4" />
-              Home
+              {commandTranslate("home")}
             </CommandItem>
             {marketingConfig.mainNav.map((navItem) => (
               <CommandItem
                 key={navItem.href}
-                value={navItem.title}
+                value={marketingTranslate(navItem.key)}
                 onSelect={() => {
                   runCommand(() => router.push(navItem.href as string))
                 }}
               >
                 <File className="mr-2 h-4 w-4" />
-                {navItem.title}
+                {marketingTranslate(navItem.key)}
               </CommandItem>
             ))}
           </CommandGroup>
           {userIsAuthentified && (
-            <CommandGroup heading="My account">
+            <CommandGroup heading={commandTranslate("my-account-section")}>
               <CommandItem
                 id="profile"
                 value={"Profile"}
@@ -110,7 +114,7 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
                 }}
               >
                 <UserIcon className="mr-2 h-4 w-4" />
-                Profile
+                {commandTranslate("user-profile")}
               </CommandItem>
               <CommandItem
                 id="dashboard"
@@ -120,12 +124,12 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
                 }}
               >
                 <BarChart2 className="mr-2 h-4 w-4" />
-                Dashboard
+                {commandTranslate("user-dashboard")}
               </CommandItem>
             </CommandGroup>
           )}
           {bankAccounts && (
-            <CommandGroup heading="Bank accounts">
+            <CommandGroup heading={commandTranslate("bank-account-section")}>
               {bankAccounts.map((bankAccount) => (
                 <CommandItem
                   key={bankAccount.id}
@@ -142,33 +146,33 @@ export function CommandMenu({ ...props }: CommandeMenuProps) {
               ))}
             </CommandGroup>
           )}
-          <CommandGroup heading="About">
+          <CommandGroup heading={commandTranslate("about-section")}>
             {footerConfig.mainNav.map((navItem) => (
               <CommandItem
                 key={navItem.href}
-                value={navItem.title}
+                value={footerTranslate(navItem.key)}
                 onSelect={() => {
                   runCommand(() => router.push(navItem.href as string))
                 }}
               >
                 <Bookmark className="mr-2 h-4 w-4" />
-                {navItem.title}
+                {footerTranslate(navItem.key)}
               </CommandItem>
             ))}
           </CommandGroup>
           <CommandSeparator />
-          <CommandGroup heading="Theme">
+          <CommandGroup heading={commandTranslate("theme-section")}>
             <CommandItem onSelect={() => runCommand(() => setTheme("light"))}>
               <SunMedium className="mr-2 h-4 w-4" />
-              Light
+              {commandTranslate("theme-light")}
             </CommandItem>
             <CommandItem onSelect={() => runCommand(() => setTheme("dark"))}>
               <Moon className="mr-2 h-4 w-4" />
-              Dark
+              {commandTranslate("theme-dark")}
             </CommandItem>
             <CommandItem onSelect={() => runCommand(() => setTheme("system"))}>
               <Laptop className="mr-2 h-4 w-4" />
-              System
+              {commandTranslate("theme-system")}
             </CommandItem>
           </CommandGroup>
         </CommandList>

@@ -3,7 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import { siteConfig } from "@/config/site"
 import { cn } from "@/lib/utils"
-import { useLocale } from "next-intl"
+import { NextIntlClientProvider, useLocale } from "next-intl"
 import { Inter, Poppins } from "next/font/google"
 import { notFound } from "next/navigation"
 import "./globals.css"
@@ -70,7 +70,11 @@ const fontHeading = Poppins({
   display: "swap",
 })
 
-export default function RootLayout({
+export function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "fr" }]
+}
+
+export default async function RootLayout({
   children,
   params,
 }: {
@@ -83,6 +87,13 @@ export default function RootLayout({
   if (params.locale !== locale) {
     notFound()
   }
+
+  let messages
+  try {
+    messages = (await import(`../../messages/${locale}.json`)).default
+  } catch (error) {
+    notFound()
+  }
   return (
     <html lang={locale} suppressHydrationWarning>
       <head />
@@ -93,11 +104,13 @@ export default function RootLayout({
           fontHeading.variable
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          {children}
-          <Toaster />
-          <TailwindIndicator />
-        </ThemeProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+            <Toaster />
+            <TailwindIndicator />
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )

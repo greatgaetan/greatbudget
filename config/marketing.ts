@@ -1,11 +1,11 @@
 export const marketingConfig = {
   mainNav: [
     {
-      title: "Features",
+      key: "features",
       href: "/#features",
     },
     {
-      title: "Pricing",
+      key: "pricing",
       href: "/pricing",
     },
   ],

@@ -1,7 +1,7 @@
 export const dashboardConfig = {
   mainNav: [
     {
-      title: "Dashboard",
+      key: "dashboard",
       href: "/dashboard",
     },
   ],

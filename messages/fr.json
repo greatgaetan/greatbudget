@@ -3,32 +3,93 @@
     "goodbye": "Fini les",
     "spreadsheets": "tableurs",
     "welcome": "place à",
-    "hero-paragraph": "Dites adieu aux budgets ennuyeux et bonjour aux délicieuses économies 🎉",
+    "hero-paragraph": "Dites adieu aux budgets ennuyeux et bonjour aux économies délicieuses 🎉",
     "hero-cta": "Commencez",
     "hero-cta-2": "— c'est gratuit",
     "features-title": "Tout pour vous",
     "features-stats-title": "Statistiques complètes sur vos dépenses",
     "features-stats-description-1": "Vous pouvez définir les objectifs que vous souhaitez atteindre pour une catégorie spécifique et nous vous aiderons à les atteindre.",
     "features-stats-description-2": "En fonction de vos objectifs, nous vous alerterons si vous dépensez trop dans une catégorie pour vous aider à atteindre vos objectifs.",
-    "features-stats-description-3": "Ce système est entièrement personnalisable et vous pouvez définir autant d'objectifs que vous le souhaitez. Avec le système de gratification, vous pourrez atteindre vos objectifs en un rien de temps!",
+    "features-stats-description-3": "Ce système est entièrement personnalisable et vous pouvez définir autant d'objectifs que vous le souhaitez. Avec le système de gratification, vous serez en mesure d'atteindre vos objectifs en un rien de temps!",
     "features-search-1": "Outil de recherche intégré pour trouver tout ce dont vous avez besoin dans l'application. Appuyez simplement sur",
     "features-search-2": "pour l'ouvrir.",
-    "features-feedback": "Beaucoup d'amour pour rendre votre expérience agréable. Nous sommes toujours à votre écoute!",
+    "features-feedback": "Beaucoup d'amour pour rendre votre expérience agréable. Nous sommes toujours ouvert(e)s à vos retours!",
     "features-goals-title": "Définissez vos objectifs pour atteindre votre cible d'économies",
     "features-goals-description-1": "Vous pouvez définir les objectifs que vous souhaitez atteindre pour une catégorie spécifique et nous vous aiderons à les atteindre.",
     "features-goals-description-2": "En fonction de vos objectifs, nous vous alerterons si vous dépensez trop dans une catégorie pour vous aider à atteindre vos objectifs.",
-    "features-goals-description-3": "Ce système est entièrement personnalisable et vous pouvez définir autant d'objectifs que vous le souhaitez. Avec le système de gratification, vous pourrez atteindre vos objectifs en un rien de temps!",
-    "features-multilanguage": "Plusieurs langues supportées. Actuellement l'anglais et le français avec pour objectif d'en couvrir beaucoup plus à l'avenir!",
+    "features-goals-description-3": "Ce système est entièrement personnalisable et vous pouvez définir autant d'objectifs que vous le souhaitez. Avec le système de gratification, vous serez en mesure d'atteindre vos objectifs en un rien de temps!",
+    "features-multilanguage": "Plusieurs langues sont supportées. Actuellement l'anglais et le français avec pour objectif d'en couvrir beaucoup plus à l'avenir!",
     "features-themes": "Une app qui vous correspond. Choisissez entre nos modes Clair et Sombre pour satisfaire vos besoins."
   },
   "login": {
     "title": "Bon retour parmi nous!",
-    "subtitle": "Entrer vos informations personnelles pour vous connecter",
+    "subtitle": "Entrez vos informations personnelles pour vous connecter",
     "to-register": "Pas encore de compte? Inscrivez-vous"
   },
   "register": {
-    "title": "Créer un compte",
-    "subtitle": "Entrer vos informations personnelles pour vous inscrire",
+    "title": "Créez un compte",
+    "subtitle": "Entrez vos informations personnelles pour vous inscrire",
     "to-login": "Déjà un compte? Connectez-vous"
+  },
+  "dashboard-config": {
+    "dashboard": "Tableau de bord"
+  },
+  "footer-config": {
+    "project": "Projet",
+    "privacy": "Confidentialité",
+    "terms": "Conditions d'utilisation"
+  },
+  "marketing-config": {
+    "features": "Fonctionnalités",
+    "pricing": "Tarifs"
+  },
+  "command-config": {
+    "search": "Recherche...",
+    "search-placeholder": "Tapez une commande ou une recherche...",
+    "no-results": "Aucun résultat trouvé.",
+    "links-section": "Liens",
+    "home": "Accueil",
+    "my-account-section": "Mon compte",
+    "user-profile": "Profil",
+    "user-dashboard": "Tableau de bord",
+    "bank-account-section": "Comptes bancaires",
+    "about-section": "À propos",
+    "theme-section": "Thème",
+    "theme-light": "Clair",
+    "theme-dark": "Sombre",
+    "theme-system": "Système"
+  },
+  "user-login-form": {
+    "email-error-message": "Veuillez entrer une adresse email valide.",
+    "password-error-message-min": "Le mot de passe doit comporter au moins 8 caractères.",
+    "password-error-message-max": "Le mot de passe doit comporter au plus 50 caractères.",
+    "email-label": "Votre email",
+    "password-label": "Votre mot de passe",
+    "password-placeholder": "Votre mot de passe super secret",
+    "submit-button": "Se connecter"
+  },
+  "user-register-form": {
+    "email-error-message": "Veuillez entrer une adresse email valide.",
+    "password-error-message-min": "Le mot de passe doit comporter au moins 8 caractères.",
+    "password-error-message-max": "Le mot de passe doit comporter au plus 50 caractères.",
+    "confirm-password-error-message": "Les mots de passe doivent correspondre.",
+    "name-error-message-min": "Veuillez entrer un nom d'au moins 2 caractères.",
+    "email-label": "Votre email",
+    "password-label": "Votre mot de passe",
+    "password-placeholder": "Votre mot de passe super secret",
+    "confirm-password-label": "Confirmez votre mot de passe",
+    "confirm-password-placeholder": "Encore une fois pour la sécurité",
+    "name-label": "Votre nom",
+    "name-placeholder": "Comment devrions-nous vous appeler ?",
+    "submit-button": "S'inscrire"
+  },
+  "toast": {
+    "error-title-default": "Une erreur est survenue",
+    "error-description-default": "Veuillez réessayer plus tard.",
+    "error-login-form": "Veuillez vérifier vos identifiants et réessayer.",
+    "success-title-default": "Succès",
+    "success-login-title": "Connexion réussie",
+    "success-login-description": "Vous êtes maintenant connecté(e). Redirection vers le tableau de bord en cours.",
+    "success-register-account-created": "Votre compte a été créé. Vous serez redirigé vers la page de connexion."
   }
 }

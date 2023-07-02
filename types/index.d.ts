@@ -11,7 +11,7 @@ export type SiteConfig = {
 }
 
 export type NavItem = {
-  title: string
+  key: string
   href: string
   disabled?: boolean
 }

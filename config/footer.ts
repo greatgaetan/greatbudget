@@ -1,7 +1,7 @@
 export const footerConfig = {
   mainNav: [
-    { href: "/about/project", title: "Project" },
-    { href: "/about/privacy", title: "Privacy" },
-    { href: "/about/terms", title: "Terms" },
+    { href: "/about/project", key: "project" },
+    { href: "/about/privacy", key: "privacy" },
+    { href: "/about/terms", key: "terms" },
   ],
 }
