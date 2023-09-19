@@ -71,10 +71,6 @@ const fontHeading = Poppins({
   display: "swap",
 })
 
-export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "fr" }]
-}
-
 export default async function RootLayout({
   children,
   params,
