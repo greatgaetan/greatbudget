@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { NextIntlClientProvider, useLocale } from "next-intl"
 import { Inter, Poppins } from "next/font/google"
 import { notFound } from "next/navigation"
+import NextTopLoader from "nextjs-toploader"
 import "./globals.css"
 
 export const metadata = {
@@ -106,6 +107,7 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <NextTopLoader color={"#3464EB"} />
             {children}
             <Toaster />
             <TailwindIndicator />

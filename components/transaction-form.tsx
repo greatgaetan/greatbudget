@@ -30,20 +30,27 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select"
-import { Separator } from "./ui/separator"
 import { toast } from "./ui/use-toast"
 
-const formSchema = z.object({
-  category: z.string().nonempty("Please select a category."),
-  description: z.string().max(50, "Description must be 50 characters or less."),
-  amount: z.coerce
-    .number()
-    .positive()
-    .refine((x) => x * 100 - Math.trunc(x * 100) < Number.EPSILON, {
-      message: "Amount must have two decimal places at most.",
-    }),
-  type: z.enum([TransactionType.INCOME, TransactionType.EXPENSE]),
-})
+const formSchema = z
+  .object({
+    category: z.string().optional(),
+    newCategory: z.string().optional(),
+    description: z
+      .string()
+      .max(50, "Description must be 50 characters or less."),
+    amount: z.coerce
+      .number()
+      .positive()
+      .refine((x) => x * 100 - Math.trunc(x * 100) < Number.EPSILON, {
+        message: "Amount must have two decimal places at most.",
+      }),
+    type: z.enum([TransactionType.INCOME, TransactionType.EXPENSE]),
+  })
+  .refine((data) => data.category || data.newCategory, {
+    message: "Please select or create a category",
+    path: ["category"],
+  })
 
 interface TransactionFormProps {
   formType: "create" | "update"
@@ -58,7 +65,6 @@ interface TransactionFormProps {
 export default function TransactionForm(props: TransactionFormProps) {
   const [isLoading, setIsLoading] = React.useState(false)
   const [requestSucceeded, setRequestSucceeded] = React.useState(false)
-  const [newCategory, setNewCategory] = React.useState("")
 
   const options = React.useMemo(
     () =>
@@ -73,11 +79,14 @@ export default function TransactionForm(props: TransactionFormProps) {
     resolver: zodResolver(formSchema),
     defaultValues: {
       category: props.transaction?.categoryId ?? "",
+      newCategory: "",
       description: props.transaction?.description ?? "",
       amount: props.transaction?.amount ?? 0,
       type: props.transaction?.type ?? TransactionType.INCOME,
     },
   })
+  const newCategory = form.watch("newCategory")
+  const category = form.watch("category")
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true)
@@ -102,7 +111,7 @@ export default function TransactionForm(props: TransactionFormProps) {
         },
         body: JSON.stringify({
           ...values,
-          categoryName: newCategory,
+          categoryName: values.newCategory,
         }),
       })
       const message = await response.json()
@@ -138,50 +147,60 @@ export default function TransactionForm(props: TransactionFormProps) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <FormField
           control={form.control}
+          name="newCategory"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Category</FormLabel>
+              <FormControl>
+                <Input
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Create a new category..."
+                  className="w-full px-2 py-1 text-sm bg-background"
+                  disabled={!!category}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex flex-row items-center justify-center">
+          <span className="text-muted-foreground text-sm">or</span>
+        </div>
+        <FormField
+          control={form.control}
           name="category"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Category</FormLabel>
               <FormControl>
-                <>
-                  <Input
-                    value={newCategory}
-                    onChange={(e: any) => setNewCategory(e.target.value)}
-                    placeholder="Create a new category..."
-                    className="w-full px-2 py-1 text-sm bg-background"
-                    disabled={field.value.length > 0}
-                  />
-                  <div className="flex flex-row items-center justify-center">
-                    <span className="text-muted-foreground text-sm">or</span>
-                  </div>
-                  <Select
-                    defaultValue={field.value}
-                    onValueChange={field.onChange}
-                    disabled={newCategory.length > 0}
-                  >
-                    <SelectTrigger>
-                      <SelectValue>
-                        {field.value.length > 0
-                          ? options.find(
-                              (option) => option.value === field.value
-                            )?.label
-                          : "Choose a category..."}
-                      </SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                      {field.value.length > 0 && (
-                        <SelectItem className="text-destructive" value="">
-                          Unselect category
-                        </SelectItem>
-                      )}
-                      {options?.map((option) => (
-                        <SelectItem key={option.value} value={option.value}>
-                          {option.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </>
+                <Select
+                  defaultValue={field.value}
+                  onValueChange={field.onChange}
+                  disabled={!!newCategory}
+                  required={!!newCategory}
+                >
+                  <SelectTrigger>
+                    <SelectValue>
+                      {(field.value?.length ?? 0) > 0
+                        ? options.find((option) => option.value === field.value)
+                            ?.label
+                        : "Choose a category..."}
+                    </SelectValue>
+                  </SelectTrigger>
+                  <SelectContent>
+                    {(field.value?.length ?? 0) > 0 && (
+                      <SelectItem className="text-destructive" value="">
+                        Unselect category
+                      </SelectItem>
+                    )}
+                    {options?.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -223,7 +242,7 @@ export default function TransactionForm(props: TransactionFormProps) {
           name="type"
           render={({ field }) => (
             <FormItem className="space-y-3">
-              <FormLabel>Notify me about...</FormLabel>
+              <FormLabel>Type</FormLabel>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
