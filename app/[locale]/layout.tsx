@@ -104,6 +104,7 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <NextTopLoader color={"#3464EB"} />
+            {/* <PreloaderContainer /> */}
             {children}
             <Toaster />
             <TailwindIndicator />
